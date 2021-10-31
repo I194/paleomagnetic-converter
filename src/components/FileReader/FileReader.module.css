@@ -1,0 +1,104 @@
+.containerMain {
+
+  position: relative;
+  margin: 40px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  
+  /* background: #e0ffff65; */
+}
+
+.blockMain {
+
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+
+}
+
+.targetBox {
+
+  width: 70%;
+  height: 4rem;
+  padding: 0 3rem;
+
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  
+  border: 2px dashed #119dff;
+  border-radius: 1.5rem;
+
+}
+
+.fileContainer {
+
+  display: flex;
+  justify-content: center;
+
+  width: 100%;
+  height: 70vh;
+  overflow: auto;
+
+  margin-top: 1.25rem;
+
+  border-radius: 1rem;
+
+  background: #e0ffff65;
+  box-shadow: 0 0 5px #d8d8d8;
+}
+
+.fileList {
+
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: left;
+
+  width: 100%;
+
+  padding: 1rem 1.25rem;
+
+}
+
+.fileRow {
+  
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: left;
+
+  font-family: monospace;
+
+  height: 30px;
+  width: 100%;
+
+  padding: 0.25rem;
+  margin-bottom: 0.25rem;
+  box-shadow: 0 0 2px #d8d8d8;
+  box-sizing: border-box;
+
+}
+
+.fileName {
+  font-weight: bold;
+}
+
+.noFiles {
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
