@@ -1,12 +1,13 @@
-import React, { FunctionComponent, useCallback, useState } from 'react';
+import React, { FunctionComponent, useCallback } from 'react';
 import { DropTargetMonitor, useDrop } from 'react-dnd';
 import { NativeTypes } from 'react-dnd-html5-backend';
 import { SET_FILES } from '../../services/actions/files';
 import { ITargetBox } from '../../services/types/components';
 
 import { useDispatch } from '../../services/types/hooks';
+import FileListBox from './FileList';
 
-import styles from './FileReader.module.css';
+import styles from './FileReader.module.scss';
 
 const TargetBox: FunctionComponent<ITargetBox> = ({onDrop}) => {
 
@@ -29,8 +30,11 @@ const TargetBox: FunctionComponent<ITargetBox> = ({onDrop}) => {
   const isActive = canDrop && isOver;
   
   return (
-    <div ref={drop} className={styles.targetBox}>
-      {isActive ? 'Отпустите файл' : 'Перетащите сюда файл'}
+    <div ref={drop} className={`${isActive ? styles.activeBlock : ''}`}>
+      <div className={`${styles.uploadButton}`}>
+        {isActive ? 'Отпустите файл' : 'Перетащите или выберите файл'}
+      </div>
+      <FileListBox />
     </div>
   )
 }

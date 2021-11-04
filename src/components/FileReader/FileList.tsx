@@ -1,7 +1,7 @@
 import React from 'react';
 import { pmcsvToDir } from '../../services/converters/toDir';
 import { useSelector } from '../../services/types/hooks';
-import styles from './FileReader.module.css';
+import styles from './FileReader.module.scss';
 
 const FileListBox = () => {
 
