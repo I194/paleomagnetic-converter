@@ -24,7 +24,9 @@ const FileListBox = () => {
         files.length 
         ?
         <div className={styles.fileList}>
-          {files.map((file: File, index: number) => dataToInfo(file, index))}
+          <div className={styles.lowerContainer}>
+            {files.map((file: File, index: number) => dataToInfo(file, index))}
+          </div>
         </div>
         :
         <div className={styles.noFiles}>
