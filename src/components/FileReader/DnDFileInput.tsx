@@ -9,7 +9,7 @@ import FileListBox from './FileList';
 
 import styles from './FileReader.module.scss';
 
-const TargetBox: FunctionComponent<ITargetBox> = ({onDrop}) => {
+const TargetBox: FunctionComponent<ITargetBox> = ({onDrop, onChange}) => {
 
   const [{ canDrop, isOver }, drop] = useDrop(
     () => ({
@@ -31,8 +31,15 @@ const TargetBox: FunctionComponent<ITargetBox> = ({onDrop}) => {
   
   return (
     <div ref={drop} className={`${isActive ? styles.activeBlock : ''}`}>
-      <div className={`${styles.uploadButton}`}>
-        {isActive ? 'Отпустите файл' : 'Перетащите или выберите файл'}
+      <div className={`${styles.uploadButton}`} >
+        <input 
+          type='file' 
+          id='input'
+          className={`${styles.inputFile}`}
+          onChange={onChange}
+          multiple={true}
+        />
+        <label htmlFor="input">{isActive ? 'Отпустите файл' : 'Перетащите или выберите файл'}</label>
       </div>
       <FileListBox />
     </div>
@@ -53,9 +60,14 @@ const DnDFileInput = () => {
     [],
   )
 
+  const handleFileUpload = (event: any) => {
+    const files = Array.from(event.currentTarget.files);
+    dispatch({type: SET_FILES, files: files});
+  }
+
   return (
     <>
-      <TargetBox onDrop={handleFileDrop}/>
+      <TargetBox onDrop={handleFileDrop} onChange={handleFileUpload}/>
     </>
   )
 }
