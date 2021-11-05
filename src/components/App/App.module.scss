@@ -1,0 +1,30 @@
+.App {
+  text-align: center;
+  background: #fcfdff;
+}
+
+.containerMain {
+
+  position: relative;
+  margin: 40px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  
+  /* background: #e0ffff65; */
+}
+
+.blockMain, .blockMain>div {
+
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+
+}

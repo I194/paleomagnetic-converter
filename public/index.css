@@ -16,6 +16,11 @@ p {
   border-radius: 1.5rem;
 }
 
+.lowerContainer {
+  width: 100%;
+  overflow: auto;
+}
+
 /* Typography classes */
 
 .text {
@@ -25,14 +30,14 @@ p {
 
 .text_main-default {
   font-family: sans-serif;
-  font-size: 16px;
+  font-size: 1rem;
   line-height: 1.5;
   font-weight: normal;
 }
 
 .text_main-large {
   font-family: sans-serif;
-  font-size: 36px;
+  font-size: 2rem;
   font-weight: normal;
   line-height: 1.1;
 }
@@ -40,13 +45,13 @@ p {
 .text_main-medium {
   font-family: sans-serif;
   font-weight: normal;
-  font-size: 24px;
+  font-size: 1.5rem;
   line-height: 1.25;
 }
 
 .text_main-small {
   font-family: sans-serif;
-  font-size: 14px;
+  font-size: 0.8rem;
   line-height: 1.43;
   font-weight: normal;
 }

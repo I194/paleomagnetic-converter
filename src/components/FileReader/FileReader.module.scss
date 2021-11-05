@@ -1,29 +1,3 @@
-.containerMain {
-
-  position: relative;
-  margin: 40px;
-
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: flex-start;
-  
-  /* background: #e0ffff65; */
-}
-
-.blockMain, .blockMain>div {
-
-  position: relative;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
-  width: 100%;
-
-}
-
 .activeBlock>div {
   box-shadow: 0 0 5px #636363;
 }
@@ -90,11 +64,6 @@
 
   padding: 1rem 1.25rem;
 
-}
-
-.lowerContainer {
-  width: 100%;
-  overflow: auto;
 }
 
 .fileRow {

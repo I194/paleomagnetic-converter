@@ -1,0 +1,65 @@
+.selectBlock {
+  width: 70%;
+  height: 4rem;
+  padding: 0 3rem;
+
+  display: flex;
+  text-align: center;
+  justify-content: space-between;
+  align-items: center;
+  
+  border-radius: 1.5rem;
+
+  background: #e0ffff65;
+  box-shadow: 0 0 5px #d8d8d8;
+}
+
+.horizontalGroup {
+
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  box-sizing: border-box;
+
+  overflow: auto;
+  scrollbar-width: none;
+
+  border-left: 1px solid rgb(154, 156, 156);
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+}
+
+.btn {
+  width: 100%;
+  height: 100%;
+  font-size: 1.5rem;
+
+  border: 1px solid transparent;
+
+  box-sizing: border-box;
+
+  &__basic {
+    background: rgba(243, 255, 255, 1);
+    border-color: rgb(154, 156, 156);
+    border-bottom: none;
+    border-top: none;
+    border-left: none;
+  }
+
+  &:focus, &:active, &:hover {
+    background: #bfdddd;
+  }
+
+  &:active, &:focus {
+    outline: 2px solid #d8d8d8;
+    position: relative; z-index: 1000
+  }
+}
+
