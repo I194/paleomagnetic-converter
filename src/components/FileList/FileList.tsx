@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import { pmcsvToDir } from '../../services/converters/toDir';
+import { IFileList } from '../../services/types/components';
 import { useSelector } from '../../services/types/hooks';
-import styles from './FileReader.module.scss';
+import styles from './FileList.module.scss';
 
-const FileListBox = () => {
+const FileListBox: FunctionComponent<IFileList> = ({ width, height, isActive, noFiles, source }) => {
 
-  const files = useSelector(state => state.files.files);
+  // eslint-disable-next-line no-eval
+  const files = useSelector(state => state.files[`${source}Files`]);
 
   const dataToInfo = (file: File, index: number) => {
     pmcsvToDir(file);
@@ -18,10 +20,16 @@ const FileListBox = () => {
     )
   }
 
+  const componentWidth: string = width ? width : '100%';
+  const componentHeight: string = height ? height : '100%';
+
   return (
-    <div className={styles.fileContainer}>
+    <div 
+      className={`${styles.fileContainer} ${isActive ? styles.fileContainer__active : ''}`} 
+      style={{width: componentWidth, height: componentHeight}}
+    >
       {
-        files.length 
+        files?.length 
         ?
         <div className={styles.fileList}>
           <div className='lowerContainer'>
@@ -30,7 +38,7 @@ const FileListBox = () => {
         </div>
         :
         <div className={styles.noFiles}>
-          Файлы отсутствуют
+          { noFiles ? noFiles : 'Файлы отсутствуют' }
         </div>
       }
     </div>

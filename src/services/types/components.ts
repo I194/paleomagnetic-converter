@@ -6,5 +6,13 @@ export interface ITargetBox {
 }
 
 export interface IFiles {
-  files: File[];
+  inputFiles: File[];
+}
+
+export interface IFileList {
+  width?: string;
+  height?: string;
+  isActive?: boolean;
+  noFiles?: string;
+  source: string;
 }

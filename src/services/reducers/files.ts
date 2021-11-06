@@ -8,7 +8,7 @@ import { TFilesActions } from "../types/files";
 
 const initialState: IFiles = {
 
-  files: []
+  inputFiles: []
 
 }
 
@@ -17,7 +17,7 @@ export const filesReducer: Reducer = (state = initialState, action: TFilesAction
     case SET_FILES: {
       return {
         ...state,
-        files: action.files
+        inputFiles: action.files
       }
     }
     case GET_FILES: {

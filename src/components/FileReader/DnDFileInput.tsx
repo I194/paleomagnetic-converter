@@ -5,7 +5,7 @@ import { SET_FILES } from '../../services/actions/files';
 import { ITargetBox } from '../../services/types/components';
 
 import { useDispatch } from '../../services/types/hooks';
-import FileListBox from './FileList';
+import FileListBox from '../FileList/FileList';
 
 import styles from './FileReader.module.scss';
 
@@ -30,8 +30,8 @@ const TargetBox: FunctionComponent<ITargetBox> = ({onDrop, onChange}) => {
   const isActive = canDrop && isOver;
   
   return (
-    <div ref={drop} className={`${isActive ? styles.activeBlock : ''}`}>
-      <div className={`${styles.uploadButton}`} >
+    <div ref={drop}>
+      <div className={`${styles.uploadButton} ${isActive ? styles.uploadButton__active : ''}`} >
         <input 
           type='file' 
           id='input'
@@ -41,7 +41,7 @@ const TargetBox: FunctionComponent<ITargetBox> = ({onDrop, onChange}) => {
         />
         <label htmlFor="input">{isActive ? 'Отпустите файл' : 'Перетащите или выберите файл'}</label>
       </div>
-      <FileListBox />
+      <FileListBox source='input' height='90%' isActive={isActive} noFiles={ isActive ? 'Отпустите файл' : undefined }/>
     </div>
   )
 }
