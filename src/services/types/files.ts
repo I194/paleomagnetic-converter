@@ -1,17 +1,31 @@
 import { 
-  SET_FILES,
-  GET_FILES,
+  SET_INPUT_FILES,
+  GET_INPUT_FILES,
+  SET_OUTPUT_FILES,
+  GET_OUTPUT_FILES,
 } from "../actions/files";
 
-export interface ISetFiles {
-  readonly type: typeof SET_FILES;
+export interface ISetInputFiles {
+  readonly type: typeof SET_INPUT_FILES;
   readonly files: File[];
 }
 
-export interface IGetFiles {
-  readonly type: typeof GET_FILES;
+export interface IGetInputFiles {
+  readonly type: typeof GET_INPUT_FILES;
 }
 
+export interface ISetOutputFiles {
+  readonly type: typeof SET_OUTPUT_FILES;
+  readonly files: File[];
+}
+
+export interface IGetOutputFiles {
+  readonly type: typeof GET_OUTPUT_FILES;
+}
+
+
 export type TFilesActions =
-  | ISetFiles
-  | IGetFiles 
+  | ISetInputFiles
+  | IGetInputFiles 
+  | ISetOutputFiles
+  | IGetOutputFiles 

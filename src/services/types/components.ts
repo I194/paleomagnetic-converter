@@ -7,6 +7,7 @@ export interface ITargetBox {
 
 export interface IFiles {
   inputFiles: File[];
+  outputFiles: File[];
 }
 
 export interface IFileList {

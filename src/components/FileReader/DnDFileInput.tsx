@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useCallback } from 'react';
 import { DropTargetMonitor, useDrop } from 'react-dnd';
 import { NativeTypes } from 'react-dnd-html5-backend';
-import { SET_FILES } from '../../services/actions/files';
+import { SET_INPUT_FILES } from '../../services/actions/files';
 import { ITargetBox } from '../../services/types/components';
 
 import { useDispatch } from '../../services/types/hooks';
@@ -54,7 +54,7 @@ const DnDFileInput = () => {
     (item) => {
       if (item) {
         const files = item.files;
-        dispatch({type: SET_FILES, files: files});
+        dispatch({type: SET_INPUT_FILES, files: files});
       }
     },
     [],
@@ -62,7 +62,7 @@ const DnDFileInput = () => {
 
   const handleFileUpload = (event: any) => {
     const files = Array.from(event.currentTarget.files);
-    dispatch({type: SET_FILES, files: files});
+    dispatch({type: SET_INPUT_FILES, files: files});
   }
 
   return (
