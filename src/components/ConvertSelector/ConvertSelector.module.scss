@@ -55,11 +55,16 @@
 
   &:focus, &:active, &:hover {
     background: #bfdddd;
+    cursor: pointer;
   }
 
   &:active, &:focus {
-    outline: 2px solid #d8d8d8;
-    position: relative; z-index: 1000
+    outline: none;
+    position: relative; 
+    z-index: 10000;
   }
+
+  font-family: monospace;
+
 }
 

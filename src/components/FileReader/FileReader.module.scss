@@ -22,6 +22,11 @@
     box-shadow: 0 0 5px #636363;
   }
 
+  &:hover {
+    background: #bfdddd;
+    cursor: pointer;
+  }
+
 }
 
 .inputFile {

@@ -7,6 +7,14 @@ p {
   margin: 0;
 }
 
+input {
+  cursor: pointer;
+}
+
+label {
+  cursor: pointer;
+}
+
 ::-webkit-scrollbar {
   width: 6px;
 }
