@@ -1,34 +1,50 @@
-export const pmcsvToDir = (file: File) => {
+const getDirectionalData = (file: File) => {
 
-  const reader = new FileReader();
-  reader.readAsText(file);   
-  reader.onload = function() {
-    console.log(reader.result);
-  }
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      resolve(reader.result);
+    };
+
+    reader.onerror = reject;
+  
+    reader.readAsText(file);   
+  })
+
+}
+
+export const toDIR = async (file: File) => {
+
+  const data = await getDirectionalData(file);
+  console.log(data)
 
   return 'hey';
 
 }
 
-export const dirToPmcsv = (file: File) => {
+export const toPMM = async (file: File) => {
 
-  const reader = new FileReader();
-  reader.readAsText(file);   
-  reader.onload = function() {
-    console.log(reader.result);
-  }
+  const data = await getDirectionalData(file);
+  console.log(data)
 
   return 'hey';
 
 }
 
-export const dirToPmxlsx = (file: File) => {
+export const toPMCSV = async (file: File) => {
 
-  const reader = new FileReader();
-  reader.readAsText(file);   
-  reader.onload = function() {
-    console.log(reader.result);
-  }
+  const data = await getDirectionalData(file);
+  console.log(data)
+
+  return 'hey';
+
+}
+
+export const toPMXLSX = async (file: File) => {
+
+  const data = await getDirectionalData(file);
+  console.log(data)
 
   return 'hey';
 

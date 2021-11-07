@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useEffect } from "react";
 import styles from "./ConvertSelector.module.scss";
 
-import { pmcsvToDir, dirToPmcsv, dirToPmxlsx } from "../../services/converters/dir";
+import { toDIR, toPMCSV, toPMM, toPMXLSX } from "../../services/converters/dir";
 import { useSelector } from "../../services/types/hooks";
 import { IFormatButton } from "../../services/types/components";
 
@@ -28,13 +28,14 @@ const ConvertSelector = () => {
 
   const handleFormatSelect = (format: string, file: File) => {
     switch (format) {
-      case 'DIR': return pmcsvToDir(file);
-      case 'CSV': return dirToPmcsv(file);
-      case 'XLSX': return dirToPmxlsx(file); 
+      case 'DIR': return toDIR(file);
+      case 'PMM': return toPMM(file);
+      case 'CSV': return toPMCSV(file);
+      case 'XLSX': return toPMXLSX(file); 
       default: return;
     }
   }
-  
+
   return (
     <div className={styles.selectBlock}>
       <div className={styles.horizontalGroup}>
