@@ -1,10 +1,10 @@
-import { parsePMM } from "./parserPMM";
+import parsePMM from "./parserPMM";
 
 export class PMParser {
 
   data;
 
-  constructor(data: string | ArrayBuffer | null) {
+  constructor(data: string) {
     this.data = data;
   }
 

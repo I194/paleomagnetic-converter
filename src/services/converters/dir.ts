@@ -8,6 +8,7 @@ const getDirectionalData = (file: File) => {
     reader.onload = () => {
 
       const handleRawData = (rawData: string | ArrayBuffer | null) => {
+        if (typeof(rawData) !== 'string') return console.log("file can't be parsed");
         const dataParser = new PMParser(rawData);
         return dataParser.parsePMM();
       }
