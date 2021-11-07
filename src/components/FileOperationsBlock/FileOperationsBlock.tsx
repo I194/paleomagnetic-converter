@@ -10,7 +10,7 @@ const FileOperationsBlock = () => {
   return (
     <div>
       <ConvertSelector />
-      <FileListBox source='output' width='60%' />
+      <FileListBox source='output' width='60%' noFiles=' '/>
     </div>
   )
 }

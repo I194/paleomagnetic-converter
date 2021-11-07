@@ -1,5 +1,4 @@
 import React, { FunctionComponent } from 'react';
-import { pmcsvToDir } from '../../services/converters/toDir';
 import { IFileList } from '../../services/types/components';
 import { useSelector } from '../../services/types/hooks';
 import styles from './FileList.module.scss';
@@ -10,7 +9,6 @@ const FileListBox: FunctionComponent<IFileList> = ({ width, height, isActive, no
   const files = useSelector(state => state.files[`${source}Files`]);
 
   const dataToInfo = (file: File, index: number) => {
-    pmcsvToDir(file);
     return (
       <div className={`${styles.fileRow} text_main-small`} key={index}>
         <p className={`${styles.fileName}`}>{file.name}</p>

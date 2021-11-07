@@ -17,3 +17,8 @@ export interface IFileList {
   noFiles?: string;
   source: string;
 }
+
+export interface IFormatButton {
+  handleClick: Function;
+  files: File[];
+}
