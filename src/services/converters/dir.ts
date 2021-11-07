@@ -1,10 +1,19 @@
+import { PMParser } from "../parsers";
+
 const getDirectionalData = (file: File) => {
 
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
 
     reader.onload = () => {
-      resolve(reader.result);
+
+      const handleRawData = (rawData: string | ArrayBuffer | null) => {
+        const dataParser = new PMParser(rawData);
+        return dataParser.parsePMM();
+      }
+
+      resolve(handleRawData(reader.result));
+
     };
 
     reader.onerror = reject;

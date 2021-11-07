@@ -40,6 +40,7 @@ const ConvertSelector = () => {
     <div className={styles.selectBlock}>
       <div className={styles.horizontalGroup}>
         <FormatButton handleClick={handleFormatSelect} files={files}>DIR</FormatButton>
+        <FormatButton handleClick={handleFormatSelect} files={files}>PMM</FormatButton>
         <FormatButton handleClick={handleFormatSelect} files={files}>CSV</FormatButton>
         <FormatButton handleClick={handleFormatSelect} files={files}>XLSX</FormatButton>
       </div>
