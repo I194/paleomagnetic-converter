@@ -2,13 +2,12 @@ const parseDIR = (data: string) => {
   
   // eslint-disable-next-line no-control-regex
   const eol = new RegExp("\r?\n");
-  // Get all lines except first and the last one (they're garbage)
-  const lines = data.split(eol).slice(1).filter(line => line.length > 1);
+  // Get all lines except the last one (it's garbage)
+  const lines = data.split(eol).filter(line => line.length > 1);
 
   const name = undefined;
 
-  // Skip 1 and 2 lines 'cause they're in the header 
-  const interpretations = lines.slice(2).map((line) => {
+  const interpretations = lines.map((line) => {
     
     const params = line.replace(/\s+/g, ' ').split(' ');
 
@@ -23,11 +22,13 @@ const parseDIR = (data: string) => {
     const Dstrat = Number(params[6]);
     const Istrat = Number(params[7]);
     const mad = Number(params[8]);
-    const k = Number(params[9]);
+    let k = undefined;
+    let comment = '';
+    if (typeof(params) === 'number') k = Number(params[9]);
+    else comment = params[9];
 
     // comment may be with spaces
-    let comment = '';
-    for (let i = 12; i < params.length; i++) comment += params[i];
+    for (let i = 10; i < params.length; i++) comment += params[i];
     comment = comment.trim();
 
     // there is no standard for demagnetization symbol... and idk why
@@ -55,7 +56,7 @@ const parseDIR = (data: string) => {
   
   return {
     "name": name,
-    "format": "PMM",
+    "format": "DIR",
     "created": new Date().toISOString(),
     "interpretations": interpretations
   };

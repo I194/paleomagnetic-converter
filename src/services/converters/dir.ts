@@ -8,9 +8,13 @@ const getDirectionalData = (file: File) => {
     reader.onload = () => {
 
       const handleRawData = (rawData: string | ArrayBuffer | null) => {
-        if (typeof(rawData) !== 'string') return console.log("file can't be parsed");
-        const dataParser = new PMParser(rawData);
-        return dataParser.parsePMM();
+        const ext = (/[.]/.exec(file.name)) ? /[^.]+$/.exec(file.name) : undefined;
+        if (typeof(rawData) !== 'string' || !ext) return console.log("file can't be parsed");
+        const dataParser = new PMParser(file.name, file.type, file.size, file.webkitRelativePath, rawData);
+        switch (ext[0].toLowerCase()) {
+          case 'dir': return dataParser.parseDIR();
+          case 'pmm': return dataParser.parsePMM(); 
+        }
       }
 
       resolve(handleRawData(reader.result));
@@ -25,7 +29,7 @@ const getDirectionalData = (file: File) => {
 }
 
 export const toDIR = async (file: File) => {
-
+  
   const data = await getDirectionalData(file);
   console.log(data)
 

@@ -8,7 +8,6 @@ const parsePMM = (data: string) => {
   const name = header[0];
 
   // Skip 1 and 2 lines 'cause they're in the header 
-  console.log(lines)
   const interpretations = lines.slice(2).map((line) => {
     
     const params = line.replace(/\s+/g, '').split(',');
