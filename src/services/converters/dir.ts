@@ -9,11 +9,12 @@ const getDirectionalData = (file: File) => {
 
       const handleRawData = (rawData: string | ArrayBuffer | null) => {
         const ext = (/[.]/.exec(file.name)) ? /[^.]+$/.exec(file.name) : undefined;
-        if (typeof(rawData) !== 'string' || !ext) return console.log("file can't be parsed");
+        if (typeof(rawData) !== 'string' || !ext) return console.log("Error: file can't be parsed");
         const pmFile = new PMFile(file.name, file.type, file.size, file.webkitRelativePath, rawData);
         switch (ext[0].toLowerCase()) {
           case 'dir': return pmFile.parseDIR();
-          case 'pmm': return pmFile.parsePMM(); 
+          case 'pmm': return pmFile.parsePMM();
+          case 'csv': return pmFile.parsePMCSV();
         }
       }
 

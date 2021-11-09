@@ -1,5 +1,6 @@
 import parseDIR from "../parsers/parserDIR";
 import parsePMM from "../parsers/parserPMM";
+import parsePMCSV from "../parsers/parserPMCSV";
 
 export default class PMFile {
 
@@ -17,12 +18,8 @@ export default class PMFile {
     this.data = data;
   }
 
-  parsePMM = () => {
-    return parsePMM(this.data);
-  }
-
-  parseDIR = () => {
-    return parseDIR(this.data);
-  }
+  parsePMM = () => parsePMM(this.data);
+  parseDIR = () => parseDIR(this.data);
+  parsePMCSV = () => parsePMCSV(this.data);
 
 }
