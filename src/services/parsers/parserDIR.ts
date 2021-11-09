@@ -1,17 +1,16 @@
-const parsePMM = (data: string) => {
+const parseDIR = (data: string) => {
+  
   // eslint-disable-next-line no-control-regex
   const eol = new RegExp("\r?\n");
   // Get all lines except first and the last one (they're garbage)
   const lines = data.split(eol).slice(1).filter(line => line.length > 1);
 
-  const header = lines[0].replace(/"/g, '').split(',');
-  const name = header[0];
+  const name = undefined;
 
   // Skip 1 and 2 lines 'cause they're in the header 
-  console.log(lines)
   const interpretations = lines.slice(2).map((line) => {
     
-    const params = line.replace(/\s+/g, '').split(',');
+    const params = line.replace(/\s+/g, ' ').split(' ');
 
     // ID | CODE | STEPRANGE | N | Dg | Ig | kg | a95g | Ds | Is | ks | a95s | comment 
     // 'kg' and 'ks' - idiotic garbage and, moreover, there is no 'a95' - there is only MAD (Maximum Angular Deviation)
@@ -21,10 +20,10 @@ const parsePMM = (data: string) => {
     const stepsCount = Number(params[3]);
     const Dgeo = Number(params[4]);
     const Igeo = Number(params[5]);
-    const madGeo = Number(params[7]);
-    const Dstrat = Number(params[8]);
-    const Istrat = Number(params[9]);
-    const madStrat = Number(params[11]);
+    const Dstrat = Number(params[6]);
+    const Istrat = Number(params[7]);
+    const mad = Number(params[8]);
+    const k = Number(params[9]);
 
     // comment may be with spaces
     let comment = '';
@@ -47,8 +46,8 @@ const parsePMM = (data: string) => {
       demagType,
       stepRange,
       stepsCount,
-      geographic: {dec: Dgeo, inc: Igeo, mad: madGeo},
-      tectonic: {dec: Dstrat, inc: Istrat, mad: madStrat},
+      geographic: {dec: Dgeo, inc: Igeo, mad, k},
+      tectonic: {dec: Dstrat, inc: Istrat, mad, k},
       comment
     };
 
@@ -63,4 +62,4 @@ const parsePMM = (data: string) => {
 
 }
 
-export default parsePMM;
+export default parseDIR;
