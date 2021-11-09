@@ -11,8 +11,7 @@ const parseDIR = (data: string) => {
     
     const params = line.replace(/\s+/g, ' ').split(' ');
 
-    // ID | CODE | STEPRANGE | N | Dg | Ig | kg | a95g | Ds | Is | ks | a95s | comment 
-    // 'kg' and 'ks' - idiotic garbage and, moreover, there is no 'a95' - there is only MAD (Maximum Angular Deviation)
+    // ID | CODE | STEPRANGE | N | Dg | Ig | kg | Ds | Is | MAD | Comment 
     const id = params[0];
     const code = params[1];
     const stepRange = params[2];
