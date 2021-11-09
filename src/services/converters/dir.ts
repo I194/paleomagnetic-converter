@@ -1,4 +1,4 @@
-import { PMParser } from "../parsers";
+import PMFile from "../pmFiles";
 
 const getDirectionalData = (file: File) => {
 
@@ -10,10 +10,10 @@ const getDirectionalData = (file: File) => {
       const handleRawData = (rawData: string | ArrayBuffer | null) => {
         const ext = (/[.]/.exec(file.name)) ? /[^.]+$/.exec(file.name) : undefined;
         if (typeof(rawData) !== 'string' || !ext) return console.log("file can't be parsed");
-        const dataParser = new PMParser(file.name, file.type, file.size, file.webkitRelativePath, rawData);
+        const pmFile = new PMFile(file.name, file.type, file.size, file.webkitRelativePath, rawData);
         switch (ext[0].toLowerCase()) {
-          case 'dir': return dataParser.parseDIR();
-          case 'pmm': return dataParser.parsePMM(); 
+          case 'dir': return pmFile.parseDIR();
+          case 'pmm': return pmFile.parsePMM(); 
         }
       }
 

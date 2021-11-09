@@ -1,7 +1,7 @@
-import parseDIR from "./parserDIR";
-import parsePMM from "./parserPMM";
+import parseDIR from "../parsers/parserDIR";
+import parsePMM from "../parsers/parserPMM";
 
-export class PMParser {
+export default class PMFile {
 
   name;
   type;
