@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useEffect } from "react";
+import React, { FunctionComponent } from "react";
 import styles from "./ConvertSelector.module.scss";
 
 import { toDIR, toPMCSV, toPMM, toPMXLSX } from "../../services/converters/dir";
