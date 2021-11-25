@@ -24,7 +24,7 @@ const parseDIR = (data: string) => {
 
     // there is no standard for demagnetization symbol... and idk why
     // normally it's T20-T570, but sometimes it's NRM-T570, so... split by '-'
-    const demagSmbl = stepRange.split('-')[1].split('')[0];
+    const demagSmbl = stepRange.split('').includes('-') ? stepRange.split('-')[1].split('')[0] : '';
     const thermalTypes = ['T', 't'];
     const alternatingTypes = ['M', 'm'];
 

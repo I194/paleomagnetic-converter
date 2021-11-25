@@ -42,7 +42,7 @@ const parsePMD = (data: string) => {
     let demagType = undefined;
 
     if (thermalTypes.indexOf(demagSmbl) > -1) demagType = 'thermal';
-    else if (alternatingTypes.indexOf(demagSmbl) > -1) demagType = 'alternating';
+    else if (alternatingTypes.indexOf(demagSmbl) > -1) demagType = 'alternating field';
 
     return {
       step,
