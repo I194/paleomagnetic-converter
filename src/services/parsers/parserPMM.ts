@@ -23,7 +23,10 @@ const parsePMM = (data: string) => {
     const madGeo = Number(params[7]);
     const Dstrat = Number(params[8]);
     const Istrat = Number(params[9]);
-    const madStrat = Number(params[11]);
+    // const madStrat = Number(params[11]);
+    // but we don't need madStrat and madGeo at the same time - they must be equal, otherwise some of them is incorrect, so...
+    const mad = madGeo;
+    const k = undefined;
 
     // comment may be with spaces
     let comment = '';
@@ -33,12 +36,12 @@ const parsePMM = (data: string) => {
     // there is no standard for demagnetization symbol... and idk why
     const demagSmbl = stepRange.split('')[0];
     const thermalTypes = ['T', 't'];
-    const alternatingTypes = ['M', 'm', 'AF', 'af', 'nT'];
+    const alternatingTypes = ['M', 'm'];
 
     let demagType = undefined;
 
     if (thermalTypes.indexOf(demagSmbl) > -1) demagType = 'thermal';
-    else if (alternatingTypes.indexOf(demagSmbl) > -1) demagType = 'alternating';
+    else if (alternatingTypes.indexOf(demagSmbl) > -1) demagType = 'alternating field';
 
     return {
       id,
@@ -46,18 +49,20 @@ const parsePMM = (data: string) => {
       demagType,
       stepRange,
       stepsCount,
-      geographic: {dec: Dgeo, inc: Igeo, mad: madGeo},
-      tectonic: {dec: Dstrat, inc: Istrat, mad: madStrat},
+      geographic: {dec: Dgeo, inc: Igeo},
+      tectonic: {dec: Dstrat, inc: Istrat},
+      mad,
+      k,
       comment
     };
 
   });
   
   return {
-    "name": name,
-    "format": "PMM",
-    "created": new Date().toISOString(),
-    "interpretations": interpretations
+    name,
+    interpretations,
+    format: "PMM",
+    created: new Date().toISOString(),
   };
 
 }

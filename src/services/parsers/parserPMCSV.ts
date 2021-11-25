@@ -37,11 +37,11 @@ const parsePMCSV = (data: string) => {
     // there is no standard for demagnetization symbol... and idk why
     const demagSmbl = stepRange.split('')[0];
     const thermalTypes = ['T', 't'];
-    const alternatingTypes = ['M', 'm', 'AF', 'af', 'nT'];
+    const alternatingTypes = ['M', 'm'];
 
     let demagType = undefined;
     if (thermalTypes.indexOf(demagSmbl) > -1) demagType = 'thermal';
-    else if (alternatingTypes.indexOf(demagSmbl) > -1) demagType = 'alternating';
+    else if (alternatingTypes.indexOf(demagSmbl) > -1) demagType = 'alternating field';
 
     return {
       id,
@@ -49,18 +49,20 @@ const parsePMCSV = (data: string) => {
       demagType,
       stepRange,
       stepsCount,
-      geographic: {dec: Dgeo, inc: Igeo, mad, k},
-      tectonic: {dec: Dstrat, inc: Istrat, mad, k},
+      geographic: {dec: Dgeo, inc: Igeo},
+      tectonic: {dec: Dstrat, inc: Istrat},
+      mad,
+      k,
       comment
     };
 
   });
   
   return {
-    "name": name,
-    "format": "PMCSV",
-    "created": new Date().toISOString(),
-    "interpretations": interpretations
+    name,
+    interpretations,
+    format: "PMCSV",
+    created: new Date().toISOString(),
   };
 
 }

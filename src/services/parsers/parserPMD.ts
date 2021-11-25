@@ -22,6 +22,7 @@ const parsePMD = (data: string) => {
 
     // PAL | Xc (Am2) | Yc (Am2) | Zc (Am2) | MAG (A/m) | Dg | Ig | Ds | Is| a95
     // PAL === Step (mT or temp degrees)
+    // it's old format and we can't just split by " " 'cause it can cause issues
     const step = line.slice(0, 5).trim();
     const x = line.slice(5, 14).trim();
     const y = line.slice(15, 25).trim();

@@ -10,6 +10,7 @@ const parseDIR = (data: string) => {
   const interpretations = lines.map((line) => {
 
     // ID | CODE | STEPRANGE | N | Dg | Ig | kg | Ds | Is | MAD | Comment 
+    // it's old format and we can't just split by " " 'cause it can cause issues
     const id = line.slice(0, 7).trim();
     const code = line.slice(7, 14).trim();
     const stepRange = line.slice(14, 24).trim();
