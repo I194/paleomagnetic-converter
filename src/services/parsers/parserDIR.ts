@@ -8,56 +8,51 @@ const parseDIR = (data: string) => {
   const name = undefined;
 
   const interpretations = lines.map((line) => {
-    
-    const params = line.replace(/\s+/g, ' ').split(' ');
 
     // ID | CODE | STEPRANGE | N | Dg | Ig | kg | Ds | Is | MAD | Comment 
-    const id = params[0];
-    const code = params[1];
-    const stepRange = params[2];
-    const stepsCount = Number(params[3]);
-    const Dgeo = Number(params[4]);
-    const Igeo = Number(params[5]);
-    const Dstrat = Number(params[6]);
-    const Istrat = Number(params[7]);
-    const mad = Number(params[8]);
-    let k = undefined;
-    let comment = '';
-    if (typeof(params) === 'number') k = Number(params[9]);
-    else comment = params[9];
-
-    // comment may be with spaces
-    for (let i = 10; i < params.length; i++) comment += params[i];
-    comment = comment.trim();
+    const id = line.slice(0, 7).trim();
+    const code = line.slice(7, 14).trim();
+    const stepRange = line.slice(14, 24).trim();
+    const stepCount = Number(line.slice(24, 27).trim());
+    const Dgeo = Number(line.slice(27, 33).trim());
+    const Igeo = Number(line.slice(33, 39).trim());
+    const Dstrat = Number(line.slice(39, 45).trim());
+    const Istrat = Number(line.slice(45, 51).trim());
+    const mad = Number(line.slice(51, 57).trim());
+    const k = Number(line.slice(57, 63).trim());
+    const comment = line.slice(63, line.length).trim();
 
     // there is no standard for demagnetization symbol... and idk why
-    const demagSmbl = stepRange.split('')[0];
+    // normally it's T20-T570, but sometimes it's NRM-T570, so... split by '-'
+    const demagSmbl = stepRange.split('-')[1].split('')[0];
     const thermalTypes = ['T', 't'];
-    const alternatingTypes = ['M', 'm', 'AF', 'af', 'nT'];
+    const alternatingTypes = ['M', 'm'];
 
     let demagType = undefined;
 
     if (thermalTypes.indexOf(demagSmbl) > -1) demagType = 'thermal';
-    else if (alternatingTypes.indexOf(demagSmbl) > -1) demagType = 'alternating';
+    else if (alternatingTypes.indexOf(demagSmbl) > -1) demagType = 'alternating field';
 
     return {
       id,
       code,
-      demagType,
       stepRange,
-      stepsCount,
-      geographic: {dec: Dgeo, inc: Igeo, mad, k},
-      tectonic: {dec: Dstrat, inc: Istrat, mad, k},
-      comment
+      stepCount,
+      geographic: {dec: Dgeo, inc: Igeo},
+      tectonic: {dec: Dstrat, inc: Istrat},
+      mad,
+      k,
+      comment,
+      demagType,
     };
 
   });
   
   return {
-    "name": name,
-    "format": "DIR",
-    "created": new Date().toISOString(),
-    "interpretations": interpretations
+    name,
+    interpretations,
+    format: "DIR",
+    created: new Date().toISOString(),
   };
 
 }
