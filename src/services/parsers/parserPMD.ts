@@ -19,25 +19,23 @@ const parsePMD = (data: string) => {
   }
 
   const steps = lines.map((line) => {
-    
-    const params = line.replace(/\s+/g, ' ').split(' ');
 
     // PAL | Xc (Am2) | Yc (Am2) | Zc (Am2) | MAG (A/m) | Dg | Ig | Ds | Is| a95
     // PAL === Step (mT or temp degrees)
-    const step = params.slice(0, 5).trim();
-    const x = params.slice(5, 14).trim();
-    const y = params.slice(15, 25).trim();
-    const z = params.slice(25, 34).trim();
-    const mag = params.slice(34, 44).trim();
-    const Dgeo = params.slice(44, 50).trim();
-    const Igeo = params.slice(50, 56).trim();
-    const Dstrat = params.slice(56, 62).trim();
-    const Istrat = params.slice(62, 68).trim();
-    const a95 = params.slice(68, 73).trim();
-    const comment = params.slice(73, params.length).trim();
+    const step = line.slice(0, 5).trim();
+    const x = line.slice(5, 14).trim();
+    const y = line.slice(15, 25).trim();
+    const z = line.slice(25, 34).trim();
+    const mag = line.slice(34, 44).trim();
+    const Dgeo = line.slice(44, 50).trim();
+    const Igeo = line.slice(50, 56).trim();
+    const Dstrat = line.slice(56, 62).trim();
+    const Istrat = line.slice(62, 68).trim();
+    const a95 = line.slice(68, 73).trim();
+    const comment = line.slice(73, line.length).trim();
 
     // there is no standard for demagnetization symbol... and idk why
-    const demagSmbl = params.slice(0, 1);
+    const demagSmbl = line.slice(0, 1);
     const thermalTypes = ['T', 't'];
     const alternatingTypes = ['M', 'm'];
 
