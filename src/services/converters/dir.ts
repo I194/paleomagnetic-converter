@@ -2,19 +2,22 @@ import PMFile from "../pmFiles";
 
 const getDirectionalData = (file: File) => {
 
+  const ext = (/[.]/.exec(file.name)) ? /[^.]+$/.exec(file.name)?.toString().toLowerCase() : undefined;
+
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
 
     reader.onload = () => {
 
       const handleRawData = (rawData: string | ArrayBuffer | null) => {
-        const ext = (/[.]/.exec(file.name)) ? /[^.]+$/.exec(file.name) : undefined;
-        if (typeof(rawData) !== 'string' || !ext) return console.log("Error: file can't be parsed");
+        console.log(ext)
+        // if (typeof(rawData) !== 'string' || !ext) return console.log("Error: file can't be parsed");
         const pmFile = new PMFile(file.name, file.type, file.size, file.webkitRelativePath, rawData);
-        switch (ext[0].toLowerCase()) {
+        switch (ext) {
           case 'dir': return pmFile.parseDIR();
           case 'pmm': return pmFile.parsePMM();
           case 'csv': return pmFile.parsePMCSV();
+          case 'xlsx': return pmFile.parsePMXLSX();        
         }
       }
 
@@ -24,7 +27,7 @@ const getDirectionalData = (file: File) => {
 
     reader.onerror = reject;
   
-    reader.readAsText(file);   
+    ext === 'xlsx' ? reader.readAsArrayBuffer(file) : reader.readAsText(file);   
   })
 
 }

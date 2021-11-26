@@ -4,14 +4,8 @@ const parsePMCSV = (data: string) => {
   const eol = new RegExp("\r?\n");
   // Get all lines except the last one (it's garbage)
   let lines = data.split(eol).filter(line => line.length > 1);
-
-  const header = lines[0].split(',');
+  
   const name = undefined;
-
-  if (header[0] !== 'ID') {
-    lines = lines.slice(1);
-    if (lines[0].split(',')[0] !== 'ID') return (console.log("Error: file can't be parsed"));
-  }
 
   const interpretations = lines.slice(1).map((line) => {
     

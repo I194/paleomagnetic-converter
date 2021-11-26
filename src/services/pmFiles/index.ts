@@ -1,6 +1,7 @@
 import parseDIR from "../parsers/parserDIR";
 import parsePMM from "../parsers/parserPMM";
 import parsePMCSV from "../parsers/parserPMCSV";
+import parsePMXLSX from "../parsers/parserPMXLSX";
 
 export default class PMFile {
 
@@ -10,7 +11,7 @@ export default class PMFile {
   path;
   data;
 
-  constructor(name: string, type: string, size: number, path: string, data: string) {
+  constructor(name: string, type: string, size: number, path: string, data: string | ArrayBuffer | null) {
     this.name = name;
     this.type = type;
     this.size = size;
@@ -18,8 +19,9 @@ export default class PMFile {
     this.data = data;
   }
 
-  parsePMM = () => parsePMM(this.data);
-  parseDIR = () => parseDIR(this.data);
-  parsePMCSV = () => parsePMCSV(this.data);
+  parsePMM = () => parsePMM(this.data as string);
+  parseDIR = () => parseDIR(this.data as string);
+  parsePMCSV = () => parsePMCSV(this.data as string);
+  parsePMXLSX = () => parsePMXLSX(this.data as ArrayBuffer);
 
 }
