@@ -5,7 +5,7 @@ const parseDIR = (data: string) => {
   // Get all lines except the last one (it's garbage)
   const lines = data.split(eol).filter(line => line.length > 1);
 
-  const name = undefined;
+  const name = '';
 
   const interpretations = lines.map((line) => {
 

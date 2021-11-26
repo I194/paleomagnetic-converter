@@ -17,7 +17,7 @@ const parsePMM = (data: string) => {
     const id = params[0];
     const code = params[1];
     const stepRange = params[2];
-    const stepsCount = Number(params[3]);
+    const stepCount = Number(params[3]);
     const Dgeo = Number(params[4]);
     const Igeo = Number(params[5]);
     const madGeo = Number(params[7]);
@@ -26,7 +26,7 @@ const parsePMM = (data: string) => {
     // const madStrat = Number(params[11]);
     // but we don't need madStrat and madGeo at the same time - they must be equal, otherwise some of them is incorrect, so...
     const mad = madGeo;
-    const k = undefined;
+    const k = -1;
 
     // comment may be with spaces
     let comment = '';
@@ -48,7 +48,7 @@ const parsePMM = (data: string) => {
       code,
       demagType,
       stepRange,
-      stepsCount,
+      stepCount,
       geographic: {dec: Dgeo, inc: Igeo},
       tectonic: {dec: Dstrat, inc: Istrat},
       mad,

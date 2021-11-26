@@ -5,7 +5,7 @@ const parsePMCSV = (data: string) => {
   // Get all lines except the last one (it's garbage)
   let lines = data.split(eol).filter(line => line.length > 1);
   
-  const name = undefined;
+  const name = '';
 
   const interpretations = lines.slice(1).map((line) => {
     
@@ -15,13 +15,13 @@ const parsePMCSV = (data: string) => {
     const id = params[0];
     const code = params[1];
     const stepRange = params[2];
-    const stepsCount = Number(params[3]);
+    const stepCount = Number(params[3]);
     const Dgeo = Number(params[4]);
     const Igeo = Number(params[5]);
     const Dstrat = Number(params[6]);
     const Istrat = Number(params[7]);
     const mad = Number(params[8]);
-    const k = undefined;
+    const k = -1;
 
     let comment = '';
     // comment may be with commas
@@ -42,7 +42,7 @@ const parsePMCSV = (data: string) => {
       code,
       demagType,
       stepRange,
-      stepsCount,
+      stepCount,
       geographic: {dec: Dgeo, inc: Igeo},
       tectonic: {dec: Dstrat, inc: Istrat},
       mad,
