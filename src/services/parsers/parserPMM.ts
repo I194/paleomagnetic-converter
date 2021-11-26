@@ -49,8 +49,10 @@ const parsePMM = (data: string) => {
       demagType,
       stepRange,
       stepCount,
-      geographic: {dec: Dgeo, inc: Igeo},
-      tectonic: {dec: Dstrat, inc: Istrat},
+      Dgeo,
+      Igeo,
+      Dstrat,
+      Istrat,
       mad,
       k,
       comment

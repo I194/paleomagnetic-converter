@@ -7,8 +7,10 @@ interface IDirData {
     code: string;
     stepRange: string;
     stepCount: number;
-    geographic: {dec: number, inc: number};
-    tectonic: {dec: number, inc: number};
+    Dgeo: number;
+    Igeo: number;
+    Dstrat: number;
+    Istrat: number;
     mad: number;
     k: number;
     comment: string;
@@ -25,8 +27,10 @@ const exampleDir = {
     code: 'string',
     stepRange: 'string',
     stepCount: 0,
-    geographic: {dec: 0, inc: 0},
-    tectonic: {dec: 0, inc: 0},
+    Dgeo: 0,
+    Igeo: 0,
+    Dstrat: 0,
+    Istrat: 0,
     mad: 0,
     k: 0,
     comment: 'string',
@@ -99,10 +103,10 @@ export const toDIR = async (file: File) => {
     const code = putParamToString(interpretation.code, dataModel.code);
     const stepRange = putParamToString(interpretation.stepRange, dataModel.stepRange);
     const stepCount = putParamToString(interpretation.stepCount, dataModel.stepCount);
-    const Dgeo = putParamToString(interpretation.geographic.dec, dataModel.Dgeo);
-    const Igeo = putParamToString(interpretation.geographic.inc, dataModel.Igeo);
-    const Dstrat = putParamToString(interpretation.tectonic.dec, dataModel.Dstrat);
-    const Istrat = putParamToString(interpretation.tectonic.inc, dataModel.Istrat);
+    const Dgeo = putParamToString(interpretation.Dgeo, dataModel.Dgeo);
+    const Igeo = putParamToString(interpretation.Igeo, dataModel.Igeo);
+    const Dstrat = putParamToString(interpretation.Dstrat, dataModel.Dstrat);
+    const Istrat = putParamToString(interpretation.Istrat, dataModel.Istrat);
     const mad = putParamToString(interpretation.mad, dataModel.mad);
     const k = putParamToString(interpretation.k, dataModel.k);
     const comment = ' ' + interpretation.comment.toString();
