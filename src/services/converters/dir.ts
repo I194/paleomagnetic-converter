@@ -79,6 +79,21 @@ const putParamToString = ((param: string|number, len: number) => {
   return param + ' '.repeat(len - param.length);
 }) 
 
+// Function to download data to a file
+const download = (data: string, filename: string, type: string) => {
+  const file = new Blob([data], {type: type});
+  const a = document.createElement("a");
+  const url = URL.createObjectURL(file);
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  setTimeout(function() {
+    document.body.removeChild(a);
+    window.URL.revokeObjectURL(url);  
+  }, 0); 
+}
+
 export const toDIR = async (file: File) => {
   
   const data = await getDirectionalData(file);
@@ -98,14 +113,14 @@ export const toDIR = async (file: File) => {
     comment: 0
   }
 
-  const lines = data.interpretations.map((interpretation: any, lineIndex: number) => {
+  const lines = data.interpretations.map((interpretation: any) => {
     const line = Object.keys(dataModel).reduce((line, param) => {
-      return putParamToString(interpretation[line], dataModel[line]) + putParamToString(interpretation[param], dataModel[param]);
-    });
+      return line + putParamToString(interpretation[param], dataModel[param])
+    }, '');
     return line;
-  }) 
+  }).join('\n');
 
-  console.log(lines.join('\n'), lines);
+  download(lines, 'res.dir', 'text/plain;charset=utf-8');
 
   return 'hey';
 
