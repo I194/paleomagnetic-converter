@@ -75,7 +75,7 @@ const getDirectionalData = (file: File) => {
 const putParamToString = ((param: string|number, len: number) => {
   if (typeof(param) === 'number') {
     return ' '.repeat(len - param.toString().length) + param.toString();
-  };
+  } else if (len === 0) return ' ' + param; // comment case
   return param + ' '.repeat(len - param.length);
 }) 
 
@@ -84,7 +84,7 @@ export const toDIR = async (file: File) => {
   const data = await getDirectionalData(file);
 
   // count of symbols for each property (column) in line (row)
-  const dataModel = {
+  const dataModel: any = {
     id: 7,
     code: 8,
     stepRange: 10,
@@ -95,26 +95,17 @@ export const toDIR = async (file: File) => {
     Istrat: 6,
     mad: 6,
     k: 5,
-    comment: 'any'
+    comment: 0
   }
-  console.log(data)
-  const lines = data.interpretations.map((interpretation: any, lineIndex: number) => {
-    const id = putParamToString(interpretation.id, dataModel.id);
-    const code = putParamToString(interpretation.code, dataModel.code);
-    const stepRange = putParamToString(interpretation.stepRange, dataModel.stepRange);
-    const stepCount = putParamToString(interpretation.stepCount, dataModel.stepCount);
-    const Dgeo = putParamToString(interpretation.Dgeo, dataModel.Dgeo);
-    const Igeo = putParamToString(interpretation.Igeo, dataModel.Igeo);
-    const Dstrat = putParamToString(interpretation.Dstrat, dataModel.Dstrat);
-    const Istrat = putParamToString(interpretation.Istrat, dataModel.Istrat);
-    const mad = putParamToString(interpretation.mad, dataModel.mad);
-    const k = putParamToString(interpretation.k, dataModel.k);
-    const comment = ' ' + interpretation.comment.toString();
 
-    return id + code + stepRange + stepCount + Dgeo + Igeo + Dstrat + Istrat + mad + k + comment;
+  const lines = data.interpretations.map((interpretation: any, lineIndex: number) => {
+    const line = Object.keys(dataModel).reduce((line, param) => {
+      return putParamToString(interpretation[line], dataModel[line]) + putParamToString(interpretation[param], dataModel[param]);
+    });
+    return line;
   }) 
 
-  console.log(lines);
+  console.log(lines.join('\n'), lines);
 
   return 'hey';
 
