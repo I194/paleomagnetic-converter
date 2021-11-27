@@ -156,7 +156,19 @@ export const toPMM = async (file: File) => {
 export const toPMCSV = async (file: File) => {
 
   const data = await getDirectionalData(file);
-  console.log(data)
+  
+  const columNames = 'id,Code,StepRange,N,Dgeo,Igeo,Dstrat,Istrat,MAD,K,Comment\n';
+
+  const lines = data.interpretations.map((interpretation: any) => {
+    const line = Object.keys(dataModel_interpretation).reduce((line, param) => {
+      return line + `${interpretation[param]},`
+    }, '')
+    return line.slice(0, -1);
+  }).join('\n');
+
+  const res = columNames + lines;
+
+  download(res, 'res.csv', 'text/csv;charset=utf-8');
 
   return 'hey';
 
