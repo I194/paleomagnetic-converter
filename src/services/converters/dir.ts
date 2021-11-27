@@ -118,9 +118,11 @@ export const toDIR = async (file: File) => {
       return line + putParamToString(interpretation[param], dataModel_interpretation[param])
     }, '');
     return line;
-  }).join('\n');
+  }).join('\r\n');
 
-  download(lines, 'res.dir', 'text/plain;charset=utf-8');
+  const res = lines + '\r\n';
+
+  download(res, 'res.dir', 'text/plain;charset=utf-8');
 
   return 'hey';
 
