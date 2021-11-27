@@ -11,7 +11,7 @@ const parsePMCSV = (data: string) => {
     
     const params = line.replace(/\s+/g, ' ').split(',');
 
-    // ID | Code | StepRange | N | Dgeo | Igeo | Dstrat | Istrat | MAD | Comment 
+    // id | Code | StepRange | N | Dgeo | Igeo | Dstrat | Istrat | MAD | K | Comment 
     const id = params[0];
     const code = params[1];
     const stepRange = params[2];
@@ -21,11 +21,11 @@ const parsePMCSV = (data: string) => {
     const Dstrat = Number(params[6]);
     const Istrat = Number(params[7]);
     const mad = Number(params[8]);
-    const k = 0;
+    const k = Number(params[9]);
 
     let comment = '';
     // comment may be with commas
-    for (let i = 9; i < params.length; i++) comment += params[i];
+    for (let i = 10; i < params.length; i++) comment += params[i];
     comment = comment.trim();
 
     // there is no standard for demagnetization symbol... and idk why
