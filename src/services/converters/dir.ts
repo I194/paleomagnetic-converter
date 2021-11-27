@@ -102,7 +102,7 @@ export const toDIR = async (file: File) => {
   const dataModel: any = {
     id: 7,
     code: 8,
-    stepRange: 10,
+    stepRange: 9,
     stepCount: 3,
     Dgeo: 6,
     Igeo: 6,
