@@ -40,6 +40,21 @@ const exampleDir = {
   created: 'string',
 }
 
+  // count of symbols for each property (column) in line (row)
+  const dataModel_interpretation: any = {
+    id: 7,
+    code: 8,
+    stepRange: 9,
+    stepCount: 3,
+    Dgeo: 6,
+    Igeo: 6,
+    Dstrat: 6,
+    Istrat: 6,
+    mad: 6,
+    k: 5,
+    comment: 0
+  }
+
 const getDirectionalData = (file: File) => {
 
   const ext = (/[.]/.exec(file.name)) ? /[^.]+$/.exec(file.name)?.toString().toLowerCase() : undefined;
@@ -98,24 +113,9 @@ export const toDIR = async (file: File) => {
   
   const data = await getDirectionalData(file);
 
-  // count of symbols for each property (column) in line (row)
-  const dataModel: any = {
-    id: 7,
-    code: 8,
-    stepRange: 9,
-    stepCount: 3,
-    Dgeo: 6,
-    Igeo: 6,
-    Dstrat: 6,
-    Istrat: 6,
-    mad: 6,
-    k: 5,
-    comment: 0
-  }
-
   const lines = data.interpretations.map((interpretation: any) => {
-    const line = Object.keys(dataModel).reduce((line, param) => {
-      return line + putParamToString(interpretation[param], dataModel[param])
+    const line = Object.keys(dataModel_interpretation).reduce((line, param) => {
+      return line + putParamToString(interpretation[param], dataModel_interpretation[param])
     }, '');
     return line;
   }).join('\n');
@@ -129,7 +129,23 @@ export const toDIR = async (file: File) => {
 export const toPMM = async (file: File) => {
 
   const data = await getDirectionalData(file);
-  console.log(data)
+
+  const metaLines = '"file_comment"\n"name","author","2021-11-27"\n';
+  const columnNames = 'ID,CODE,STEPRANGE,N,Dg,Ig,kg,a95g,Ds,Is,ks,a95s,comment\n';
+
+  const lines = data.interpretations.map((interpretation: any) => {
+    const line = Object.keys(dataModel_interpretation).reduce((line, param, i) => {
+      if (i === 6) return line + `${interpretation.k},${interpretation.mad},${interpretation[param]},`;
+      if (i === 8) return line + `${interpretation.k},${interpretation.mad},${interpretation.comment}`;
+      if (i > 8) return line;
+      return line + `${interpretation[param]},`;
+    }, '');
+    return line;
+  }).join('\n');
+
+  const res = metaLines + columnNames + lines;
+
+  download(res, 'res.pmm', 'text/plain;charset=utf-8');
 
   return 'hey';
 

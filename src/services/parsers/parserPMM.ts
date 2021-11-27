@@ -26,7 +26,7 @@ const parsePMM = (data: string) => {
     // const madStrat = Number(params[11]);
     // but we don't need madStrat and madGeo at the same time - they must be equal, otherwise some of them is incorrect, so...
     const mad = madGeo;
-    const k = -1;
+    const k = 0;
 
     // comment may be with spaces
     let comment = '';

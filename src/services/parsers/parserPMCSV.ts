@@ -21,7 +21,7 @@ const parsePMCSV = (data: string) => {
     const Dstrat = Number(params[6]);
     const Istrat = Number(params[7]);
     const mad = Number(params[8]);
-    const k = -1;
+    const k = 0;
 
     let comment = '';
     // comment may be with commas
