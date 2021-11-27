@@ -1,3 +1,4 @@
+import * as XLSX from 'xlsx';
 import PMFile from "../pmFiles";
 
 interface IDirData {
@@ -94,8 +95,15 @@ const putParamToString = ((param: string|number, len: number) => {
   return param + ' '.repeat(len - param.length);
 }) 
 
+const s2ab = (s: string) => { 
+  const buf = new ArrayBuffer(s.length); // Convert s to arrayBuffer
+  const view = new Uint8Array(buf);  // Create uint8array as viewer
+  for (let i = 0; i < s.length; i++) view[i] = s.charCodeAt(i) & 0xFF; // Convert to octet - excel can read only octet (2^8) data
+  return buf;    
+}
+
 // Function to download data to a file
-const download = (data: string, filename: string, type: string) => {
+const download = (data: string | ArrayBuffer, filename: string, type: string) => {
   const file = new Blob([data], {type: type});
   const a = document.createElement("a");
   const url = URL.createObjectURL(file);
@@ -177,7 +185,25 @@ export const toPMCSV = async (file: File) => {
 export const toPMXLSX = async (file: File) => {
 
   const data = await getDirectionalData(file);
-  console.log(data)
+
+  const columnNames = 'id,Code,StepRange,N,Dgeo,Igeo,Dstrat,Istrat,MAD,K,Comment'.split(',');
+
+  const lines = data.interpretations.map((interpretation: any) => {
+    return Object.keys(dataModel_interpretation).map((param) => {
+      return interpretation[param];
+    });
+  });
+
+  const wbook = XLSX.utils.book_new();
+  wbook.SheetNames.push('data');
+  lines.unshift(columnNames);
+  const wsheet = XLSX.utils.aoa_to_sheet(lines);
+  wbook.Sheets.data = wsheet;
+  const wbinary = XLSX.write(wbook, {bookType: 'xlsx', type: 'binary'});
+
+  const res = s2ab(wbinary);
+
+  download(res, 'res.xlsx', "application/octet-stream")
 
   return 'hey';
 
