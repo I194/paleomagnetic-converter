@@ -23,17 +23,17 @@ const parsePMD = (data: string) => {
     // PAL | Xc (Am2) | Yc (Am2) | Zc (Am2) | MAG (A/m) | Dg | Ig | Ds | Is| a95
     // PAL === Step (mT or temp degrees)
     // it's old format and we can't just split by " " 'cause it can cause issues
-    const step = line.slice(0, 5).trim();
-    const x = line.slice(5, 14).trim();
-    const y = line.slice(15, 25).trim();
-    const z = line.slice(25, 34).trim();
+    const step = line.slice(0, 4).trim();
+    const x = line.slice(4, 14).trim();
+    const y = line.slice(14, 24).trim();
+    const z = line.slice(24, 34).trim();
     const mag = line.slice(34, 44).trim();
     const Dgeo = line.slice(44, 50).trim();
     const Igeo = line.slice(50, 56).trim();
     const Dstrat = line.slice(56, 62).trim();
     const Istrat = line.slice(62, 68).trim();
-    const a95 = line.slice(68, 73).trim();
-    const comment = line.slice(73, line.length).trim();
+    const a95 = line.slice(68, 74).trim();
+    const comment = line.slice(74, line.length).trim();
 
     // there is no standard for demagnetization symbol... and idk why
     const demagSmbl = line.slice(0, 1);

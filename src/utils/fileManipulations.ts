@@ -1,6 +1,33 @@
 import PMFile from "../services/pmFiles";
 import { exampleDir } from "./fileConstants";
 
+export interface IPmdData {
+  metadata: {
+    name: string;
+    a: number;
+    b: number;
+    s: number;
+    d: number;
+    v: number;
+  };
+  steps: {
+    step: string;
+    x: number;
+    y: number;
+    z: number;
+    mag: number;
+    Dgeo: number;
+    Igeo: number;
+    Dstrat: number;
+    Istrat: number;
+    a95: number;
+    comment: string;
+    demagType: string;
+  }[];
+  format: string;
+  created: string;
+}
+
 export interface IDirData {
   name: string;
   interpretations: {
@@ -26,7 +53,7 @@ export const getDirectionalData = (file: File) => {
 
   const ext = (/[.]/.exec(file.name)) ? /[^.]+$/.exec(file.name)?.toString().toLowerCase() : undefined;
 
-  return new Promise<IDirData | string>((resolve, reject) => {
+  return new Promise<IPmdData | IDirData>((resolve, reject) => {
     const reader = new FileReader();
 
     reader.onload = () => {
