@@ -3,7 +3,8 @@ import {
   SET_INPUT_FILES,
   GET_INPUT_FILES,
   SET_OUTPUT_FILES,
-  GET_OUTPUT_FILES
+  GET_OUTPUT_FILES,
+  SET_AVAILABLE_FORMATS
 } from "../actions/files";
 import { IFiles } from "../types/components";
 import { TFilesActions } from "../types/files";
@@ -11,7 +12,9 @@ import { TFilesActions } from "../types/files";
 const initialState: IFiles = {
 
   inputFiles: [],
-  outputFiles: []
+  outputFiles: [],
+
+  availableFormats: ['DIR', 'PMM', 'CSV', 'XLSX']
 
 }
 
@@ -37,6 +40,12 @@ export const filesReducer: Reducer = (state = initialState, action: TFilesAction
     case GET_OUTPUT_FILES: {
       return {
         ...state
+      }
+    }
+    case SET_AVAILABLE_FORMATS: {
+      return {
+        ...state,
+        availableFormats: action.formats
       }
     }
     default: {

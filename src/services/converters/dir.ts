@@ -46,7 +46,7 @@ export const toPMM = async (file: File) => {
 
 }
 
-export const toPMCSV = async (file: File) => {
+export const toCSV_DIR = async (file: File) => {
 
   const data = await getDirectionalData(file) as IDirData;
   
@@ -67,7 +67,7 @@ export const toPMCSV = async (file: File) => {
 
 }
 
-export const toPMXLSX = async (file: File) => {
+export const toXLSX_DIR = async (file: File) => {
 
   const data = await getDirectionalData(file) as IDirData;
 

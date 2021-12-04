@@ -8,6 +8,7 @@ export interface ITargetBox {
 export interface IFiles {
   inputFiles: File[];
   outputFiles: File[];
+  availableFormats: string[];
 }
 
 export interface IFileList {
@@ -21,4 +22,5 @@ export interface IFileList {
 export interface IFormatButton {
   handleClick: Function;
   files: File[];
+  initialFormat: string;
 }

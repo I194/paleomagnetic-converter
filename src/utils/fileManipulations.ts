@@ -65,7 +65,7 @@ export const getDirectionalData = (file: File) => {
           case 'dir': return pmFile.parseDIR();
           case 'pmm': return pmFile.parsePMM();
           case 'csv': return pmFile.parsePMCSV();
-          case 'xlsx': return pmFile.parsePMXLSX();       
+          case 'xlsx': return pmFile.parsePMXLSX(); 
           default: return exampleDir;
         }
       }

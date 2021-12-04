@@ -39,50 +39,50 @@ export const toPMD = async (file: File) => {
 
 }
 
-// export const toPMDCSV = async (file: File) => {
+export const toCSV_PMD = async (file: File) => {
 
-//   const data = await getDirectionalData(file) as IDirData;
+  // const data = await getDirectionalData(file) as IDirData;
   
-//   const columNames = 'id,Code,StepRange,N,Dgeo,Igeo,Dstrat,Istrat,MAD,K,Comment\n';
+  // const columNames = 'id,Code,StepRange,N,Dgeo,Igeo,Dstrat,Istrat,MAD,K,Comment\n';
 
-//   const lines = data.interpretations.map((interpretation: any) => {
-//     const line = Object.keys(dataModel_interpretation).reduce((line, param) => {
-//       return line + `${interpretation[param]},`
-//     }, '')
-//     return line.slice(0, -1);
-//   }).join('\n');
+  // const lines = data.interpretations.map((interpretation: any) => {
+  //   const line = Object.keys(dataModel_interpretation).reduce((line, param) => {
+  //     return line + `${interpretation[param]},`
+  //   }, '')
+  //   return line.slice(0, -1);
+  // }).join('\n');
 
-//   const res = columNames + lines;
+  // const res = columNames + lines;
 
-//   download(res, 'res.csv', 'text/csv;charset=utf-8');
+  // download(res, 'res.csv', 'text/csv;charset=utf-8');
 
-//   return 'hey';
+  return 'hey';
 
-// }
+}
 
-// export const toPMDXLSX = async (file: File) => {
+export const toXLSX_PMD = async (file: File) => {
 
-//   const data = await getDirectionalData(file) as IDirData;
+  // const data = await getDirectionalData(file) as IDirData;
 
-//   const columnNames = 'id,Code,StepRange,N,Dgeo,Igeo,Dstrat,Istrat,MAD,K,Comment'.split(',');
+  // const columnNames = 'id,Code,StepRange,N,Dgeo,Igeo,Dstrat,Istrat,MAD,K,Comment'.split(',');
 
-//   const lines = data.interpretations.map((interpretation: any) => {
-//     return Object.keys(dataModel_interpretation).map((param) => {
-//       return interpretation[param];
-//     });
-//   });
+  // const lines = data.interpretations.map((interpretation: any) => {
+  //   return Object.keys(dataModel_interpretation).map((param) => {
+  //     return interpretation[param];
+  //   });
+  // });
 
-//   const wbook = XLSX.utils.book_new();
-//   wbook.SheetNames.push('data');
-//   lines.unshift(columnNames);
-//   const wsheet = XLSX.utils.aoa_to_sheet(lines);
-//   wbook.Sheets.data = wsheet;
-//   const wbinary = XLSX.write(wbook, {bookType: 'xlsx', type: 'binary'});
+  // const wbook = XLSX.utils.book_new();
+  // wbook.SheetNames.push('data');
+  // lines.unshift(columnNames);
+  // const wsheet = XLSX.utils.aoa_to_sheet(lines);
+  // wbook.Sheets.data = wsheet;
+  // const wbinary = XLSX.write(wbook, {bookType: 'xlsx', type: 'binary'});
 
-//   const res = s2ab(wbinary);
+  // const res = s2ab(wbinary);
 
-//   download(res, 'res.xlsx', "application/octet-stream")
+  // download(res, 'res.xlsx', "application/octet-stream")
 
-//   return 'hey';
+  return 'hey';
 
-// }
+}

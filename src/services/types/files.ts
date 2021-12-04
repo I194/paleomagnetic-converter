@@ -3,6 +3,7 @@ import {
   GET_INPUT_FILES,
   SET_OUTPUT_FILES,
   GET_OUTPUT_FILES,
+  SET_AVAILABLE_FORMATS,
 } from "../actions/files";
 
 export interface ISetInputFiles {
@@ -23,9 +24,15 @@ export interface IGetOutputFiles {
   readonly type: typeof GET_OUTPUT_FILES;
 }
 
+export interface ISetAvailableFormats {
+  readonly type: typeof SET_AVAILABLE_FORMATS;
+  readonly formats: string[];
+}
+
 
 export type TFilesActions =
   | ISetInputFiles
   | IGetInputFiles 
   | ISetOutputFiles
   | IGetOutputFiles 
+  | ISetAvailableFormats
