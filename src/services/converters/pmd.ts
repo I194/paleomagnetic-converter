@@ -41,20 +41,29 @@ export const toPMD = async (file: File) => {
 
 export const toCSV_PMD = async (file: File) => {
 
-  // const data = await getDirectionalData(file) as IDirData;
-  
-  // const columNames = 'id,Code,StepRange,N,Dgeo,Igeo,Dstrat,Istrat,MAD,K,Comment\n';
+  const data = await getDirectionalData(file) as IPmdData;
 
-  // const lines = data.interpretations.map((interpretation: any) => {
-  //   const line = Object.keys(dataModel_interpretation).reduce((line, param) => {
-  //     return line + `${interpretation[param]},`
-  //   }, '')
-  //   return line.slice(0, -1);
-  // }).join('\n');
+  const metaNames = 'a,b,s,d,v(m3)\n';
+  const metaLine = [
+    data.metadata.a,
+    data.metadata.b,
+    data.metadata.s,
+    data.metadata.d,
+    data.metadata.v,
+  ].join(',') + '\n';
 
-  // const res = columNames + lines;
+  const columnNames = 'PAL,Xc(Am2),Yc(Am2),Zc(Am2),MAG(A/m),Dg,Ig,Ds,Is,a95\n';
 
-  // download(res, 'res.csv', 'text/csv;charset=utf-8');
+  const lines = data.steps.map((step: any) => {
+    const line = Object.keys(dataModel_step).reduce((line, param) => {
+      return line + `${step[param]},`
+    }, '')
+    return line.slice(0, -1);
+  }).join('\n');
+
+  const res = metaNames + metaLine + columnNames + lines;
+
+  download(res, 'res.csv', 'text/csv;charset=utf-8');
 
   return 'hey';
 
