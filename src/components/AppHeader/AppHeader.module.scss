@@ -33,6 +33,14 @@
   &:hover {
     background: #bfdddd;
   }
+
+  &:focus {
+    background: #bfdddd;
+  }
+}
+
+.active {
+  background: #bfdddd;
 }
 
 a:link, a:visited, a:active {
