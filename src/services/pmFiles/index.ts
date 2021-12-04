@@ -1,8 +1,9 @@
 import parseDIR from "../parsers/parserDIR";
 import parsePMM from "../parsers/parserPMM";
-import parsePMCSV from "../parsers/parserPMCSV";
-import parsePMXLSX from "../parsers/parserPMXLSX";
+import parseCSV_DIR from "../parsers/parserCSV_DIR";
+import parseXLSX_DIR from "../parsers/parserXLSX_DIR";
 import parsePMD from "../parsers/parserPMD";
+import parseCSV_PMD from "../parsers/parserCSV_PMD";
 
 export default class PMFile {
 
@@ -21,9 +22,10 @@ export default class PMFile {
   }
 
   parsePMD = () => parsePMD(this.data as string);
+  parseCSV_PMD = () => parseCSV_PMD(this.data as string);
   parsePMM = () => parsePMM(this.data as string);
   parseDIR = () => parseDIR(this.data as string);
-  parsePMCSV = () => parsePMCSV(this.data as string);
-  parsePMXLSX = () => parsePMXLSX(this.data as ArrayBuffer);
+  parseCSV_DIR = () => parseCSV_DIR(this.data as string);
+  parseXLSX_DIR = () => parseXLSX_DIR(this.data as ArrayBuffer);
 
 }

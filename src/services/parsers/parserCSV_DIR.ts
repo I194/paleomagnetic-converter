@@ -1,4 +1,4 @@
-const parsePMCSV = (data: string) => {
+const parseCSV_DIR = (data: string) => {
   
   // eslint-disable-next-line no-control-regex
   const eol = new RegExp("\r?\n");
@@ -63,4 +63,4 @@ const parsePMCSV = (data: string) => {
 
 }
 
-export default parsePMCSV;
+export default parseCSV_DIR;

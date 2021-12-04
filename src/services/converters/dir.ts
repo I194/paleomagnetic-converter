@@ -4,7 +4,7 @@ import { download, getDirectionalData, IDirData, putParamToString, s2ab } from '
 
 export const toDIR = async (file: File) => {
   
-  const data = await getDirectionalData(file) as IDirData;
+  const data = await getDirectionalData(file, 'dir') as IDirData;
 
   const lines = data.interpretations.map((interpretation: any) => {
     const line = Object.keys(dataModel_interpretation).reduce((line, param) => {
@@ -23,7 +23,7 @@ export const toDIR = async (file: File) => {
 
 export const toPMM = async (file: File) => {
 
-  const data = await getDirectionalData(file) as IDirData;
+  const data = await getDirectionalData(file, 'dir') as IDirData;
 
   const metaLines = '"file_comment"\n"name","author","2021-11-27"\n';
   const columnNames = 'ID,CODE,STEPRANGE,N,Dg,Ig,kg,a95g,Ds,Is,ks,a95s,comment\n';
@@ -48,7 +48,7 @@ export const toPMM = async (file: File) => {
 
 export const toCSV_DIR = async (file: File) => {
 
-  const data = await getDirectionalData(file) as IDirData;
+  const data = await getDirectionalData(file, 'dir') as IDirData;
   
   const columNames = 'id,Code,StepRange,N,Dgeo,Igeo,Dstrat,Istrat,MAD,K,Comment\n';
 
@@ -69,7 +69,7 @@ export const toCSV_DIR = async (file: File) => {
 
 export const toXLSX_DIR = async (file: File) => {
 
-  const data = await getDirectionalData(file) as IDirData;
+  const data = await getDirectionalData(file, 'dir') as IDirData;
 
   const columnNames = 'id,Code,StepRange,N,Dgeo,Igeo,Dstrat,Istrat,MAD,K,Comment'.split(',');
 

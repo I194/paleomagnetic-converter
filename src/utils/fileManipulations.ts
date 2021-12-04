@@ -53,7 +53,7 @@ export interface IDirData extends IObjectKeys {
 }
 
 
-export const getDirectionalData = (file: File) => {
+export const getDirectionalData = (file: File, as: string) => {
 
   const ext = (/[.]/.exec(file.name)) ? /[^.]+$/.exec(file.name)?.toString().toLowerCase() : undefined;
 
@@ -69,8 +69,16 @@ export const getDirectionalData = (file: File) => {
           case 'pmd': return pmFile.parsePMD();
           case 'dir': return pmFile.parseDIR();
           case 'pmm': return pmFile.parsePMM();
-          case 'csv': return pmFile.parsePMCSV();
-          case 'xlsx': return pmFile.parsePMXLSX(); 
+          case 'csv': {
+            if (as === 'pmd') return pmFile.parseCSV_PMD();
+            if (as === 'dir') return pmFile.parseCSV_DIR();
+            return exampleDir;
+          }
+          case 'xlsx': {
+            // if (as === 'pmd') return pmFile.parseXLSX_PMD();
+            if (as === 'dir') return pmFile.parseXLSX_DIR();
+            return exampleDir;
+          }
           default: return exampleDir;
         }
       }

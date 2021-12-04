@@ -4,7 +4,7 @@ import { download, getDirectionalData, IPmdData, putParamToString, s2ab } from '
 
 export const toPMD = async (file: File) => {
   
-  const data = await getDirectionalData(file) as IPmdData;
+  const data = await getDirectionalData(file, 'pmd') as IPmdData;
 
   const extraMeta: any = {
     ...data.metadata,
@@ -41,7 +41,7 @@ export const toPMD = async (file: File) => {
 
 export const toCSV_PMD = async (file: File) => {
 
-  const data = await getDirectionalData(file) as IPmdData;
+  const data = await getDirectionalData(file, 'pmd') as IPmdData;
 
   const metaNames = 'a,b,s,d,v(m3)\n';
   const metaLine = [
@@ -71,7 +71,7 @@ export const toCSV_PMD = async (file: File) => {
 
 export const toXLSX_PMD = async (file: File) => {
 
-  const data = await getDirectionalData(file) as IPmdData;
+  const data = await getDirectionalData(file, 'pmd') as IPmdData;
 
   const metaNames = 'a,b,s,d,v (m3)'.split(',');
   const metaLine = [
