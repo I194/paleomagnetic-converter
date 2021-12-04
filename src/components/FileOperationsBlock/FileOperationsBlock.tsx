@@ -10,7 +10,7 @@ const FileOperationsBlock = () => {
   return (
     <div>
       <ConvertSelector />
-      <FileListBox source='output' width='60%' noFiles=' '/>
+      <FileListBox source='output' width='60%' noFiles='Конвертированные файлы автоматически начнут загружаться при нажатии на одну из кнопок выше'/>
     </div>
   )
 }

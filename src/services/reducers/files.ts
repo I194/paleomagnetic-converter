@@ -45,7 +45,7 @@ export const filesReducer: Reducer = (state = initialState, action: TFilesAction
     case SET_AVAILABLE_FORMATS: {
       return {
         ...state,
-        availableFormats: action.formats
+        availableFormats: [...action.formats]
       }
     }
     default: {

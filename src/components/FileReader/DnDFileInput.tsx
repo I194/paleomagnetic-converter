@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useCallback } from 'react';
+import React, { FunctionComponent, useCallback, useEffect } from 'react';
 import { DropTargetMonitor, useDrop } from 'react-dnd';
 import { NativeTypes } from 'react-dnd-html5-backend';
 import { SET_INPUT_FILES } from '../../services/actions/files';
@@ -57,10 +57,10 @@ const DnDFileInput = () => {
 
   const formats = useSelector(state => state.files.availableFormats);
 
-  const isFileValid = (filename: string) => {
+  const isFileValid = (filename: string, formats: string[]) => {
     if (!filename.includes('.')) return false;
     const ext = filename.split('.').pop()?.toUpperCase();
-    return formats.includes(ext);
+    return formats.includes(ext as string);
   }
 
   const handleFileDrop = useCallback(
@@ -68,12 +68,12 @@ const DnDFileInput = () => {
       if (item) {
         const files = item.files;
         for (let i = 0; i < files.length; i++) {
-          if (!isFileValid(files[i].name)) return null;
+          if (!isFileValid(files[i].name, formats)) return null;
         }
         dispatch({type: SET_INPUT_FILES, files: files});
       }
     },
-    [],
+    [formats],
   )
 
   const handleFileUpload = (event: any) => {
