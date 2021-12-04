@@ -1,0 +1,40 @@
+.navPanel {
+  
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+
+  height: 56px;
+  width: 100%;
+  
+  background: #f8f9fc;
+  box-shadow: 0 0 5px #d8d8d8;
+  /* border-bottom: 1px solid #d8d8d8; */
+}
+
+.navBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 100%;
+
+  font-size: 1.5rem;
+  font-weight: 400;
+
+  padding: 0.6rem;
+  box-sizing: border-box;
+  border: none;
+  background-color: transparent;
+
+  cursor: pointer;
+
+  &:hover {
+    background: #bfdddd;
+  }
+}
+
+a:link, a:visited, a:active {
+  text-decoration: none;
+}
