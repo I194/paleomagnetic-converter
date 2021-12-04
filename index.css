@@ -1,0 +1,65 @@
+:root {
+	--offset-base-variable: 2px;
+	--offset-base-size: 4px;
+}
+
+p {
+  margin: 0;
+}
+
+input {
+  cursor: pointer;
+}
+
+label {
+  cursor: pointer;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  border: 3px solid #bcaee4b9;
+  border-radius: 1.5rem;
+}
+
+.lowerContainer {
+  width: 100%;
+  overflow: auto;
+}
+
+/* Typography classes */
+
+.text {
+  margin: 0;
+  padding: 0;
+}
+
+.text_main-default {
+  font-family: sans-serif;
+  font-size: 1rem;
+  line-height: 1.5;
+  font-weight: normal;
+}
+
+.text_main-large {
+  font-family: sans-serif;
+  font-size: 2rem;
+  font-weight: normal;
+  line-height: 1.1;
+}
+
+.text_main-medium {
+  font-family: sans-serif;
+  font-weight: normal;
+  font-size: 1.5rem;
+  line-height: 1.25;
+}
+
+.text_main-small {
+  font-family: sans-serif;
+  font-size: 0.8rem;
+  line-height: 1.43;
+  font-weight: normal;
+}
