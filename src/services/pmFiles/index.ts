@@ -2,6 +2,7 @@ import parseDIR from "../parsers/parserDIR";
 import parsePMM from "../parsers/parserPMM";
 import parsePMCSV from "../parsers/parserPMCSV";
 import parsePMXLSX from "../parsers/parserPMXLSX";
+import parsePMD from "../parsers/parserPMD";
 
 export default class PMFile {
 
@@ -19,6 +20,7 @@ export default class PMFile {
     this.data = data;
   }
 
+  parsePMD = () => parsePMD(this.data as string);
   parsePMM = () => parsePMM(this.data as string);
   parseDIR = () => parseDIR(this.data as string);
   parsePMCSV = () => parsePMCSV(this.data as string);

@@ -62,26 +62,37 @@ export const toCSV_PMD = async (file: File) => {
 
 export const toXLSX_PMD = async (file: File) => {
 
-  // const data = await getDirectionalData(file) as IDirData;
+  const data = await getDirectionalData(file) as IPmdData;
 
-  // const columnNames = 'id,Code,StepRange,N,Dgeo,Igeo,Dstrat,Istrat,MAD,K,Comment'.split(',');
+  const metaNames = 'a,b,s,d,v (m3)'.split(',');
+  const metaLine = [
+    data.metadata.a,
+    data.metadata.b,
+    data.metadata.s,
+    data.metadata.d,
+    data.metadata.v,
+  ];
 
-  // const lines = data.interpretations.map((interpretation: any) => {
-  //   return Object.keys(dataModel_interpretation).map((param) => {
-  //     return interpretation[param];
-  //   });
-  // });
+  const columnNames = 'PAL, Xc (Am2), Yc (Am2), Zc (Am2), MAG(A/m), Dg, Ig, Ds, Is, a95'.split(',');
 
-  // const wbook = XLSX.utils.book_new();
-  // wbook.SheetNames.push('data');
-  // lines.unshift(columnNames);
-  // const wsheet = XLSX.utils.aoa_to_sheet(lines);
-  // wbook.Sheets.data = wsheet;
-  // const wbinary = XLSX.write(wbook, {bookType: 'xlsx', type: 'binary'});
+  const lines = data.steps.map((step: any) => {
+    return Object.keys(dataModel_step).map((param) => {
+      return step[param];
+    });
+  });
 
-  // const res = s2ab(wbinary);
+  const wbook = XLSX.utils.book_new();
+  wbook.SheetNames.push('data');
+  lines.unshift(columnNames);
+  lines.unshift(metaLine);
+  lines.unshift(metaNames);
+  const wsheet = XLSX.utils.aoa_to_sheet(lines);
+  wbook.Sheets.data = wsheet;
+  const wbinary = XLSX.write(wbook, {bookType: 'xlsx', type: 'binary'});
 
-  // download(res, 'res.xlsx', "application/octet-stream")
+  const res = s2ab(wbinary);
+
+  download(res, 'res.xlsx', "application/octet-stream")
 
   return 'hey';
 

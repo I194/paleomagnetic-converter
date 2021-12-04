@@ -1,7 +1,11 @@
 import PMFile from "../services/pmFiles";
 import { exampleDir } from "./fileConstants";
 
-export interface IPmdData {
+interface IObjectKeys {
+  [key: string | number | symbol]: any;
+}
+
+export interface IPmdData extends IObjectKeys {
   metadata: {
     name: string;
     a: number;
@@ -22,13 +26,13 @@ export interface IPmdData {
     Istrat: number;
     a95: number;
     comment: string;
-    demagType: string;
+    demagType: string | undefined;
   }[];
   format: string;
   created: string;
 }
 
-export interface IDirData {
+export interface IDirData extends IObjectKeys {
   name: string;
   interpretations: {
     id: string;
@@ -62,6 +66,7 @@ export const getDirectionalData = (file: File) => {
         const pmFile = new PMFile(file.name, file.type, file.size, file.webkitRelativePath, rawData);
         console.log(ext)
         switch (ext) {
+          case 'pmd': return pmFile.parsePMD();
           case 'dir': return pmFile.parseDIR();
           case 'pmm': return pmFile.parsePMM();
           case 'csv': return pmFile.parsePMCSV();
