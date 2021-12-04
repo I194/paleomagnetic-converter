@@ -3,6 +3,7 @@ import { ChangeEventHandler } from "react";
 export interface ITargetBox {
   onDrop: (item: { files: any[] }) => void;
   onChange: ChangeEventHandler<HTMLInputElement>;
+  avFormats: string[];
 }
 
 export interface IFiles {

@@ -3495,6 +3495,11 @@
   "resolved" "https://registry.npmjs.org/clean-stack/-/clean-stack-2.2.0.tgz"
   "version" "2.2.0"
 
+"client-zip@^2.0.0":
+  "integrity" "sha512-JFd4zdhxk5F01NmNnBq3+iMgJkkh0ku9NsI1wZlUjZ52inPJX92vR5TlSkjxRhmHJBPI7YqanD71wDEiKhdWtw=="
+  "resolved" "https://registry.npmjs.org/client-zip/-/client-zip-2.0.0.tgz"
+  "version" "2.0.0"
+
 "cliui@^5.0.0":
   "integrity" "sha512-PYeGSEmmHM6zvoef2w8TPzlrnNpXIjTipYK780YswmIP9vjxmd6Y2a3CB2Ks6/AU8NHjZugXvo8w3oWM2qnwXA=="
   "resolved" "https://registry.npmjs.org/cliui/-/cliui-5.0.0.tgz"

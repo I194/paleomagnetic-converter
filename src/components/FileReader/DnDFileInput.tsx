@@ -4,12 +4,13 @@ import { NativeTypes } from 'react-dnd-html5-backend';
 import { SET_INPUT_FILES } from '../../services/actions/files';
 import { ITargetBox } from '../../services/types/components';
 
-import { useDispatch } from '../../services/types/hooks';
+import { useDispatch, useSelector } from '../../services/types/hooks';
+import { getFileName } from '../../utils/subFunctions';
 import FileListBox from '../FileList/FileList';
 
 import styles from './FileReader.module.scss';
 
-const TargetBox: FunctionComponent<ITargetBox> = ({onDrop, onChange}) => {
+const TargetBox: FunctionComponent<ITargetBox> = ({onDrop, onChange, avFormats}) => {
 
   const [{ canDrop, isOver }, drop] = useDrop(
     () => ({
@@ -27,6 +28,9 @@ const TargetBox: FunctionComponent<ITargetBox> = ({onDrop, onChange}) => {
     [onDrop]
   );
 
+  const formats = avFormats.join(', .').toLowerCase().split('');
+  formats.unshift('.'); 
+
   const isActive = canDrop && isOver;
   
   return (
@@ -38,6 +42,7 @@ const TargetBox: FunctionComponent<ITargetBox> = ({onDrop, onChange}) => {
           className={`${styles.inputFile}`}
           onChange={onChange}
           multiple={true}
+          accept={formats.join('')}
         />
         <label htmlFor="input">{isActive ? 'Отпустите файл' : 'Перетащите или выберите файл'}</label>
       </div>
@@ -50,10 +55,21 @@ const DnDFileInput = () => {
 
   const dispatch = useDispatch();
 
+  const formats = useSelector(state => state.files.availableFormats);
+
+  const isFileValid = (filename: string) => {
+    if (!filename.includes('.')) return false;
+    const ext = filename.split('.').pop()?.toUpperCase();
+    return formats.includes(ext);
+  }
+
   const handleFileDrop = useCallback(
     (item) => {
       if (item) {
         const files = item.files;
+        for (let i = 0; i < files.length; i++) {
+          if (!isFileValid(files[i].name)) return null;
+        }
         dispatch({type: SET_INPUT_FILES, files: files});
       }
     },
@@ -67,7 +83,7 @@ const DnDFileInput = () => {
 
   return (
     <>
-      <TargetBox onDrop={handleFileDrop} onChange={handleFileUpload}/>
+      <TargetBox onDrop={handleFileDrop} onChange={handleFileUpload} avFormats={formats}/>
     </>
   )
 }

@@ -7,6 +7,10 @@ const FileListBox: FunctionComponent<IFileList> = ({ width, height, isActive, no
 
   // eslint-disable-next-line no-eval
   const files = useSelector(state => state.files[`${source}Files`]);
+  const avFormats = useSelector(state => state.files.availableFormats);
+
+  const formats = avFormats.join(', .').toLowerCase().split('');
+  formats.unshift('.'); 
 
   const dataToInfo = (file: File, index: number) => {
     return (
@@ -36,7 +40,12 @@ const FileListBox: FunctionComponent<IFileList> = ({ width, height, isActive, no
         </div>
         :
         <div className={styles.noFiles}>
-          { noFiles ? noFiles : 'Файлы отсутствуют' }
+          { 
+            noFiles ? noFiles : 'Файлы отсутствуют' 
+          }
+          {
+            source === 'input' ? <p style={{marginTop: '1rem'}}>Доступные форматы: {formats.join('')}</p> : ''
+          }
         </div>
       }
     </div>
