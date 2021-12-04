@@ -94,13 +94,6 @@ export const getDirectionalData = (file: File, as: string) => {
 
 }
 
-export const putParamToString = ((param: string|number, len: number) => {
-  if (typeof(param) === 'number') {
-    return ' '.repeat(len - param.toString().length) + param.toString();
-  } else if (len === 0) return ' ' + param; // comment case
-  return param + ' '.repeat(len - param.length);
-}) 
-
 export const s2ab = (s: string) => { 
   const buf = new ArrayBuffer(s.length); // Convert s to arrayBuffer
   const view = new Uint8Array(buf);  // Create uint8array as viewer

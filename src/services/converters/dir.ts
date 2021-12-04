@@ -1,6 +1,7 @@
 import * as XLSX from 'xlsx';
 import { dataModel_interpretation } from '../../utils/fileConstants';
-import { download, getDirectionalData, IDirData, putParamToString, s2ab } from '../../utils/fileManipulations';
+import { download, getDirectionalData, IDirData, s2ab } from '../../utils/fileManipulations';
+import { putParamToString } from '../../utils/subFunctions';
 
 export const toDIR = async (file: File) => {
   

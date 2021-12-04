@@ -20,3 +20,19 @@ export const xlsx_to_csv = function to_csv(workbook: any) {
   });
   return result.join("\n");
 };
+
+export const toExponential_PMD = (num: number | string) => {
+  if (!+num) return num;
+  num = +num; 
+  // pmd-like exponential format looks like this: -2.85E-08, 1.57E-02, 2.34E-12, ...
+	const expRow = num.toExponential(2).toUpperCase().split('');
+  if (!+expRow.slice(-2, -1)) expRow.splice(-1, 0, '0');
+  return expRow.join('');
+}
+
+export const putParamToString = ((param: string|number, len: number, alignRight?: boolean) => {
+  if ((typeof(param) === 'number') || alignRight) {
+    return ' '.repeat(len - param.toString().length) + param.toString();
+  } else if (len === 0) return ' ' + param; // comment case
+  return param + ' '.repeat(len - param.length);
+}) 

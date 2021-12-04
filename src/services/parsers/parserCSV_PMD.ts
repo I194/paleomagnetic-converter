@@ -8,7 +8,7 @@ const parseCSV_PMD = (data: string) => {
   const headLine = lines[1].split(',');
 
   const metadata = {
-    name: '',
+    name: 'name',
     a: +headLine[0],
     b: +headLine[1],
     s: +headLine[2],

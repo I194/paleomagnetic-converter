@@ -10,7 +10,7 @@ const parsePMD = (data: string) => {
   
   const headLine = lines[0]; // line with speciment name and orientation params - metadata in other words
   const metadata = {
-    name: headLine.slice(0, 10).trim(),
+    name: headLine.slice(0, 10).trim() || 'name',
     a: +headLine.slice(12, 20).trim(),
     b: +headLine.slice(22, 30).trim(),
     s: +headLine.slice(32, 40).trim(),

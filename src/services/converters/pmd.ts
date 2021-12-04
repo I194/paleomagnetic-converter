@@ -1,6 +1,7 @@
 import * as XLSX from 'xlsx';
 import { dataModel_interpretation, dataModel_metaPMD, dataModel_step } from '../../utils/fileConstants';
-import { download, getDirectionalData, IPmdData, putParamToString, s2ab } from '../../utils/fileManipulations';
+import { download, getDirectionalData, IPmdData, s2ab } from '../../utils/fileManipulations';
+import { toExponential_PMD, putParamToString } from '../../utils/subFunctions';
 
 export const toPMD = async (file: File) => {
   
@@ -19,19 +20,30 @@ export const toPMD = async (file: File) => {
   const metaLines = [
     'file_name   some_path',
     Object.keys(dataModel_metaPMD).reduce((line, param) => {
+      console.log(extraMeta[param], dataModel_metaPMD[param], param)
+      if (param === 'v') return (
+        line + putParamToString(extraMeta[param].toExponential(1).toUpperCase(), dataModel_metaPMD[param], true)
+      );
+      if (typeof extraMeta[param] === 'number') return (
+        line + putParamToString(extraMeta[param].toFixed(1), dataModel_metaPMD[param], true)
+      );
       return line + putParamToString(extraMeta[param], dataModel_metaPMD[param]);
-    }, '') + 'm3',
-  ].join('\n');
+    }, '').trim() + 'm3',
+  ].join('\r\n') + '\r\n';
 
-  const columnNames = ' PAL  Xc (Am2)  Yc (Am2)  Zc (Am2)  MAG(A/m)   Dg    Ig    Ds    Is   a95 \n';
+  const columnNames = ' PAL  Xc (Am2)  Yc (Am2)  Zc (Am2)  MAG(A/m)   Dg    Ig    Ds    Is   a95 \r\n';
 
   const lines = data.steps.map((step: any) => {
     return Object.keys(dataModel_step).reduce((line, param) => {
-      return line + putParamToString(step[param], dataModel_step[param]);
+      const alignRight = !!(typeof(step[param]) === 'number');
+      if (dataModel_step[param] === 6 || dataModel_step[param] === 6) {
+        return line + putParamToString(step[param].toFixed(1), dataModel_step[param], alignRight);
+      };
+      return line + putParamToString(toExponential_PMD(step[param]), dataModel_step[param], alignRight);
     }, '');
-  }).join('\n');
+  }).join('\r\n');
 
-  const res = metaLines + columnNames + lines + '\n';
+  const res = metaLines + columnNames + lines + '\r\n';
 
   download(res, 'res.pmd', 'text/plain;charset=utf-8');
 
