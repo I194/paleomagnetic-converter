@@ -1,7 +1,7 @@
 import * as XLSX from 'xlsx';
 import { dataModel_interpretation } from '../../utils/fileConstants';
 import { download, getDirectionalData, IDirData, s2ab } from '../../utils/fileManipulations';
-import { putParamToString } from '../../utils/subFunctions';
+import { getFileName, putParamToString } from '../../utils/subFunctions';
 
 export const toDIR = async (file: File) => {
   
@@ -15,8 +15,9 @@ export const toDIR = async (file: File) => {
   }).join('\r\n');
 
   const res = lines + '\r\n';
+  const filename = getFileName(data.name);
 
-  download(res, 'res.dir', 'text/plain;charset=utf-8');
+  download(res, `${filename}.dir`, 'text/plain;charset=utf-8');
 
   return 'hey';
 
@@ -26,7 +27,7 @@ export const toPMM = async (file: File) => {
 
   const data = await getDirectionalData(file, 'dir') as IDirData;
 
-  const metaLines = '"file_comment"\n"name","author","2021-11-27"\n';
+  const metaLines = `"file_comment"\n${data.name},"author","2021-11-27"\n`;
   const columnNames = 'ID,CODE,STEPRANGE,N,Dg,Ig,kg,a95g,Ds,Is,ks,a95s,comment\n';
 
   const lines = data.interpretations.map((interpretation: any) => {
@@ -40,8 +41,9 @@ export const toPMM = async (file: File) => {
   }).join('\n');
 
   const res = metaLines + columnNames + lines;
+  const filename = getFileName(data.name);
 
-  download(res, 'res.pmm', 'text/plain;charset=utf-8');
+  download(res, `${filename}.pmm`, 'text/plain;charset=utf-8');
 
   return 'hey';
 
@@ -61,8 +63,9 @@ export const toCSV_DIR = async (file: File) => {
   }).join('\n');
 
   const res = columNames + lines;
+  const filename = getFileName(data.name);
 
-  download(res, 'res.csv', 'text/csv;charset=utf-8');
+  download(res, `${filename}.csv`, 'text/csv;charset=utf-8');
 
   return 'hey';
 
@@ -88,8 +91,9 @@ export const toXLSX_DIR = async (file: File) => {
   const wbinary = XLSX.write(wbook, {bookType: 'xlsx', type: 'binary'});
 
   const res = s2ab(wbinary);
+  const filename = getFileName(data.name);
 
-  download(res, 'res.xlsx', "application/octet-stream")
+  download(res, `${filename}.xlsx`, "application/octet-stream")
 
   return 'hey';
 

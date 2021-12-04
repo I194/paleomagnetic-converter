@@ -1,11 +1,11 @@
-const parsePMM = (data: string) => {
+const parsePMM = (data: string, name: string) => {
   // eslint-disable-next-line no-control-regex
   const eol = new RegExp("\r?\n");
   // Get all lines except first and the last one (they're garbage)
   const lines = data.split(eol).slice(1).filter(line => line.length > 1);
 
   const header = lines[0].replace(/"/g, '').split(',');
-  const name = header[0];
+  name = header[0] || name;
 
   // Skip 1 and 2 lines 'cause they're in the header 
   const interpretations = lines.slice(2).map((line) => {

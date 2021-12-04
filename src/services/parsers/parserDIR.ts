@@ -1,11 +1,9 @@
-const parseDIR = (data: string) => {
+const parseDIR = (data: string, name: string) => {
   
   // eslint-disable-next-line no-control-regex
   const eol = new RegExp("\r?\n");
   // Get all lines except the last one (it's garbage)
   const lines = data.split(eol).filter(line => line.length > 1);
-
-  const name = '';
 
   const interpretations = lines.map((line) => {
 

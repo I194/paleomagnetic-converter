@@ -1,4 +1,4 @@
-const parseCSV_PMD = (data: string) => {
+const parseCSV_PMD = (data: string, name: string) => {
   
   // eslint-disable-next-line no-control-regex
   const eol = new RegExp("\r?\n");
@@ -8,7 +8,7 @@ const parseCSV_PMD = (data: string) => {
   const headLine = lines[1].split(',');
 
   const metadata = {
-    name: 'name',
+    name,
     a: +headLine[0],
     b: +headLine[1],
     s: +headLine[2],
@@ -69,7 +69,7 @@ const parseCSV_PMD = (data: string) => {
   return {
     metadata,
     steps,
-    format: "PMD_CSV",
+    format: "CSV_PMD",
     created: new Date().toISOString(),
   };
 

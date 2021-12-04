@@ -31,8 +31,18 @@ export const toExponential_PMD = (num: number | string) => {
 }
 
 export const putParamToString = ((param: string|number, len: number, alignRight?: boolean) => {
+  let parameter = param.toString().slice(0, len);
   if ((typeof(param) === 'number') || alignRight) {
-    return ' '.repeat(len - param.toString().length) + param.toString();
+    return ' '.repeat(len - parameter.length) + parameter;
   } else if (len === 0) return ' ' + param; // comment case
-  return param + ' '.repeat(len - param.length);
+  return parameter + ' '.repeat(len - parameter.length);
 }) 
+
+export const getFileName = (fullname: string) => {
+  // delete file extension and get file name
+  if (!fullname.includes('.')) return fullname;
+  const filename = fullname.split('.');
+  filename.pop();
+  console.log(filename, filename.join(''))
+  return filename.join('');
+}

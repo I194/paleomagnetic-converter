@@ -1,7 +1,7 @@
 import * as XLSX from 'xlsx';
 import { dataModel_interpretation, dataModel_metaPMD, dataModel_step } from '../../utils/fileConstants';
 import { download, getDirectionalData, IPmdData, s2ab } from '../../utils/fileManipulations';
-import { toExponential_PMD, putParamToString } from '../../utils/subFunctions';
+import { toExponential_PMD, putParamToString, getFileName } from '../../utils/subFunctions';
 
 export const toPMD = async (file: File) => {
   
@@ -18,7 +18,7 @@ export const toPMD = async (file: File) => {
 
   // 119_0     a=162.9   b= 62.0   s=270.0   d=  0.0   v= 1.0E-6m3 --- example
   const metaLines = [
-    'file_name   some_path',
+    ' ',
     Object.keys(dataModel_metaPMD).reduce((line, param) => {
       console.log(extraMeta[param], dataModel_metaPMD[param], param)
       if (param === 'v') return (
@@ -36,7 +36,7 @@ export const toPMD = async (file: File) => {
   const lines = data.steps.map((step: any) => {
     return Object.keys(dataModel_step).reduce((line, param) => {
       const alignRight = !!(typeof(step[param]) === 'number');
-      if (dataModel_step[param] === 6 || dataModel_step[param] === 6) {
+      if (dataModel_step[param] === 6 || dataModel_step[param] === 5) {
         return line + putParamToString(step[param].toFixed(1), dataModel_step[param], alignRight);
       };
       return line + putParamToString(toExponential_PMD(step[param]), dataModel_step[param], alignRight);
@@ -44,8 +44,9 @@ export const toPMD = async (file: File) => {
   }).join('\r\n');
 
   const res = metaLines + columnNames + lines + '\r\n';
+  const filename = getFileName(data.metadata.name);
 
-  download(res, 'res.pmd', 'text/plain;charset=utf-8');
+  download(res, `${filename}.pmd`, 'text/plain;charset=utf-8');
 
   return 'hey';
 
@@ -74,8 +75,9 @@ export const toCSV_PMD = async (file: File) => {
   }).join('\n');
 
   const res = metaNames + metaLine + columnNames + lines;
+  const filename = getFileName(data.metadata.name);
 
-  download(res, 'res.csv', 'text/csv;charset=utf-8');
+  download(res, `${filename}.csv`, 'text/csv;charset=utf-8');
 
   return 'hey';
 
@@ -112,8 +114,9 @@ export const toXLSX_PMD = async (file: File) => {
   const wbinary = XLSX.write(wbook, {bookType: 'xlsx', type: 'binary'});
 
   const res = s2ab(wbinary);
+  const filename = getFileName(data.metadata.name);
 
-  download(res, 'res.xlsx', "application/octet-stream")
+  download(res, `${filename}.xlsx`, "application/octet-stream")
 
   return 'hey';
 

@@ -1,11 +1,9 @@
-const parseCSV_DIR = (data: string) => {
+const parseCSV_DIR = (data: string, name: string) => {
   
   // eslint-disable-next-line no-control-regex
   const eol = new RegExp("\r?\n");
   // Get all lines except the last one (it's garbage)
   let lines = data.split(eol).filter(line => line.length > 1);
-  
-  const name = '';
 
   const interpretations = lines.slice(1).map((line) => {
     
@@ -57,7 +55,7 @@ const parseCSV_DIR = (data: string) => {
   return {
     name,
     interpretations,
-    format: "PMCSV",
+    format: "CSV_DIR",
     created: new Date().toISOString(),
   };
 
