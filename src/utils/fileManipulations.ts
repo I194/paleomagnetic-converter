@@ -75,7 +75,7 @@ export const getDirectionalData = (file: File, as: string) => {
             return exampleDir;
           }
           case 'xlsx': {
-            // if (as === 'pmd') return pmFile.parseXLSX_PMD();
+            if (as === 'pmd') return pmFile.parseXLSX_PMD();
             if (as === 'dir') return pmFile.parseXLSX_DIR();
             return exampleDir;
           }
