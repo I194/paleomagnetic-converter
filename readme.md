@@ -3,13 +3,14 @@
 Конвертер палеомагнитных данных, записанных в различных форматах.
 
 В проекте используются:
-1. **React.js**
-2. **Redux.js**
+1. **React**
+2. **Redux** и **Redux Thunk**
 3. **TypeScript.js**
+4. **React DnD**
 
-А также **React DnD** и **Redux Thunk**.
+Сайт проекта - https://i194.github.io/paleomagnetic-converter/.
 
-:exclamation: Проект находится в стадии разработки. 
+Дальнейшая разработка проекта не планируется, однако существует его логическое продолжение - [paleomagnetic-data-renderer](https://github.com/I194/paleomagnetic-data-renderer). Дальнейшая работа над внутренней моделью хранения палеомагнитных данных планируется также в том проекте. 
 
 Сборка
 ---
