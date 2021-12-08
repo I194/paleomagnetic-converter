@@ -34,7 +34,7 @@ export const putParamToString = ((param: string|number, len: number, alignRight?
   let parameter = param.toString().slice(0, len);
   if ((typeof(param) === 'number') || alignRight) {
     return ' '.repeat(len - parameter.length) + parameter;
-  } else if (len === 0) return ' ' + param; // comment case
+  } else if (len === 0) return '  ' + param; // comment case
   return parameter + ' '.repeat(len - parameter.length);
 }) 
 
