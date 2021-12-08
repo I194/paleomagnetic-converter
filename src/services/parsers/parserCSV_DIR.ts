@@ -14,12 +14,12 @@ const parseCSV_DIR = (data: string, name: string) => {
     const code = params[1];
     const stepRange = params[2];
     const stepCount = Number(params[3]);
-    const Dgeo = Number(params[4]);
-    const Igeo = Number(params[5]);
-    const Dstrat = Number(params[6]);
-    const Istrat = Number(params[7]);
-    const mad = Number(params[8]);
-    const k = Number(params[9]);
+    const Dgeo = +(+params[4]).toFixed(1);
+    const Igeo = +(+params[5]).toFixed(1);
+    const Dstrat = +(+params[6]).toFixed(1);
+    const Istrat = +(+params[7]).toFixed(1);
+    const mad = +(+params[8]).toFixed(1);
+    const k = +(+params[9]);
 
     let comment = '';
     // comment may be with commas

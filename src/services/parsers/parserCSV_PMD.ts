@@ -24,15 +24,15 @@ const parseCSV_PMD = (data: string, name: string) => {
     // PAL === Step (mT or temp degrees)
     // it's old format and we can't just split by " " 'cause it can cause issues
     const step = params[0];
-    const x = +params[1];
-    const y = +params[2];
-    const z = +params[3];
-    const mag = +params[4];
-    const Dgeo = +params[5];
-    const Igeo = +params[6];
-    const Dstrat = +params[7];
-    const Istrat = +params[8];
-    const a95 = +params[9];
+    const x = +(+params[1]).toExponential(2);
+    const y = +(+params[2]).toExponential(2);
+    const z = +(+params[3]).toExponential(2);
+    const mag = +(+params[4]).toExponential(2);
+    const Dgeo = +(+params[5]).toFixed(1);
+    const Igeo = +(+params[6]).toFixed(1);
+    const Dstrat = +(+params[7]).toFixed(1);
+    const Istrat = +(+params[8]).toFixed(1);
+    const a95 = +(+params[9]).toFixed(1);
 
     let comment = '';
     // comment may be with commas
